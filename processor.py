@@ -24,7 +24,7 @@ class Board:
         self.state[move[0][0]][move[0][1]] = 0
 
 
-    # returns 1 if successful, 0 if likely user error, - 1 if likely code error?
+    # returns 1 if successful, 0 if likely user error, - 1 if likely code error?, -2 if somehow nothing runs?
 
     # takes the new sensor map, if it is different, update the board.
     # note that self.state is not updated until a move is completed.
@@ -62,6 +62,8 @@ class Board:
             self.firstCoord = None
             return 1
         
+        
+
         # place first piece on new sqaure
         if (self.firstCoord != None) and (newSensor == 1) and (self.secondCoord == None):
             if self.checkValidMove((self.firstCoord, (y, x))):
@@ -71,13 +73,24 @@ class Board:
             else:
                 return 0
 
-        # pick up piece for capture
-        if (self.firstCoord != None)
-
+        # pick up second piece for capture
+        if (self.firstCoord != None) and (newSensor == 0) and (self.secondCoord == None):
+            self.secondCoord = (y, x)
+            return  1
         
+        # capture second piece
+        if (self.firstCoord != None) and (newSensor == 1) and (self.secondCoord != None):
+            if self.checkValidMove(self.firstCoord, (y, x)):
+                self.state[self.secondCoord[0]][self.secondCoord[1]] = 0 # nessesary in case we add enpassant
+                self.rawMove(self.firstCoord, (y, x))
+                self.firstCoord = None
+                self.secondCoord = None
+                return 1
+            else:
+                return 0
             
             
-
+        return -2 # nothing ran some how????? this should never excute unless i'm low.
 
         
 
