@@ -1,7 +1,7 @@
-from pyfirmata import util, Arduino
+from pyfirmata import *
 import time
 
-board = pyfirmata.Arduino('/dev/ttyACM0')
+board = pyfirmata.Arduino('COM5')
 
 while True:
     board.iterate()
