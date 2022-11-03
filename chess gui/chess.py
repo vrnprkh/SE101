@@ -2,17 +2,19 @@ import pygame
 pygame.init() 
 def isLegal (piece):
     legality = True
-        
+
     return legality
 
 def displayGame ():
     screen = pygame.display.set_mode([800, 800])
     path = './graphics/'
 
-    # none = 0; pawn = 1; rook = 2; knight = 3; bishop = 4; queen = 5; king = 6
-    gameState = [[1, 2, 3, 4], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]]
 
-    chessPieces = [path+"Pawn.png", path+"Rook.png", path+"Knight.png", path+"Bishop.png", path+"Queen.png", path+"King.png"]
+    # none = 0; black pawn = 1; black rook = 2; black knight = 3; black bishop = 4; black queen = 5; black king = 6
+    # white pawn = 7; white rook = 8; white knight = 9; white bishop = 10; white queen = 11; white king = 12
+    gameState = [[1, 2, 3, 4], [5, 6, 0, 0], [0, 0, 7, 8], [9, 10, 11, 12]]
+
+    chessPieces = [path+"Pawn.png", path+"Rook.png", path+"Knight.png", path+"Bishop.png", path+"Queen.png", path+"King.png", path+"PawnW.png", path+"RookW.png", path+"KnightW.png", path+"BishopW.png", path+"QueenW.png", path+"KingW.png"]
 
     coords = [[[0, 0], [200, 0], [400, 0], [600, 0], [800, 0]],
             [[0, 200], [200, 200], [400, 200], [600, 200], [800, 200]],
