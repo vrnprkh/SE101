@@ -6,14 +6,13 @@ def isLegal (piece):
     return legality
 
 def displayGame ():
-    screen = pygame.display.set_mode([800, 800])
+    screen = pygame.display.set_mode([1100, 800])
     path = './graphics/'
-
 
     # none = 0; black pawn = 1; black rook = 2; black knight = 3; black bishop = 4; black queen = 5; black king = 6
     # white pawn = 7; white rook = 8; white knight = 9; white bishop = 10; white queen = 11; white king = 12
     gameState = [[1, 2, 3, 4], [5, 6, 0, 0], [0, 0, 7, 8], [9, 10, 11, 12]]
-
+    
     chessPieces = [path+"Pawn.png", path+"Rook.png", path+"Knight.png", path+"Bishop.png", path+"Queen.png", path+"King.png", path+"PawnW.png", path+"RookW.png", path+"KnightW.png", path+"BishopW.png", path+"QueenW.png", path+"KingW.png"]
 
     coords = [[[0, 0], [200, 0], [400, 0], [600, 0], [800, 0]],
@@ -31,8 +30,9 @@ def displayGame ():
         for event in pygame.event.get():
             if event.type == pygame.QUIT: running = False
 
-        screen.fill((238, 237, 232))
-
+        screen.fill((40, 43, 47))
+        pygame.draw.rect(screen, (62, 63, 60), pygame.Rect(810, 10, 280, 760))
+        
         # Draw the chessboard
         gray = (175, 171, 157)
         cream = (232, 233, 222)
@@ -49,7 +49,8 @@ def displayGame ():
                     if (gameState[i][j] != 0):
                         img = pygame.image.load(chessPieces[gameState[i][j] - 1]).convert_alpha()
                         screen.blit(img, (coords[i][j][0], coords[i][j][1]))
-                        
+
+          
         pygame.display.flip()
 
     pygame.quit()
