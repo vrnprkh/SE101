@@ -91,8 +91,3 @@ class Board:
             
             
         return -2 # nothing ran some how????? this should never excute unless i'm low.
-
-        
-
-
-
