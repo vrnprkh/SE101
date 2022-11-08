@@ -1,22 +1,10 @@
-from pyfirmata import *
-import time
+from pyfirmata import Arduino, util
 
-board = pyfirmata.Arduino('COM5')
+board = Arduino('COM5')
+iterator = util.Iterator(board)
 
-while True:
-    board.iterate()
-    input7 = board.get_pin('d:7:i')
-    while(input7.read() == 1):
-        board.digital[13].write(1)
-        time.sleep(1)
-        board.digital[13].write(0)
-        time.sleep(1)
+iterator.start
 
-
-
-"""
-
-
-
-
-"""
+board.analog[10].read()
+while(True):
+    board
