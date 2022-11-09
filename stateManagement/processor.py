@@ -1,4 +1,4 @@
-
+# OUTDATED CODE
 class Board:
     def __init__(self, state = [[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]]):
         # state is 4x4 grid of pieces by default
@@ -97,33 +97,6 @@ class Board:
     
      
      # returns 1 if successful, 0 if likely user error, - 1 if likely code error?, -2 if somehow nothing runs?
-
-    # takes the new sensor map, if it is different, update the board.
-    # note that self.state is not updated until a move is completed.
-    #better version that deals with negatives which makes life 10x easier
-    #WIP
-    # def processSensorsPolarity(self, newSensorMap):
-    #     x = 0
-    #     y = 0
-    #     updates = []
-    #     for i, layer in enumerate(newSensorMap):
-    #         for j, e in enumerate(layer):
-    #             if self.sensorMap[i][j] != e:
-    #                 updates.append((y, x, e))
-        
-    #     changes = len(updates)
-
-    #     # no updates
-    #     if changes == 0:
-    #         return 1
-        
-    #     newSensor = newSensorMap[y][x] # value of new sensor
-
-    #     #fails
-    #     if changes >= 3: # if more than two updates 
-    #         return 0
-    #     if (self.secondCoord != None) and (newSensor != 1):
-    #         pass
 
 
     
