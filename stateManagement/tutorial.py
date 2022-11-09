@@ -11,5 +11,8 @@ class TutorialLevel:
             return True
     
     def makeMove(self, move):
-        if move in self.subStates[self.current][1]:
-            self.current = self.subStates[self.current][1][2]
+        # TODO TEST ME !
+        if move in self.subStates[self.current][1][0]:
+            for e in self.subStates[self.current][1]:
+                if e[:1] == move:
+                    self.current = e[2]

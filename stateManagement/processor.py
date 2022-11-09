@@ -48,7 +48,7 @@ class Board:
         # fails
         if count >= 2: # more than 1 update
             return 0
-        if (self.secondCoord != None) and (newSensor == 1): # 
+        if (self.secondCoord != None) and (newSensor == 0): # 
             return 0
         if (self.firstCoord == None) and (newSensor == 1):
             return -1
