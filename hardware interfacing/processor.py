@@ -4,14 +4,16 @@ class Board:
         # state is 4x4 grid of pieces by default
         self.state = state
 
-        #sensor map is 4x4 grid of 0s and 1s, which is the current sensor state.
+        #sensor map is 4x4 grid of -1s, 0s, and 1s, which is current sensor state
         self.sensorMap = [[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]]
         for i, layer in enumerate(state):
             for j, e in enumerate(layer):
                 if e != 0:
-                    self.sensorMap[i][j] == 1
+                    self.sensorMap[i][j] == e
         self.firstCoord = None
+        self.hand1 = 0
         self.secondCoord = None
+        self.hand2 = 0
 
     #note a move is nested tuple ((y1, x1), (y1, x1))
     def checkValidMove(self, move):
@@ -23,7 +25,8 @@ class Board:
         self.state[move[1][0]][move[1][1]] = self.state[move[0][0]][move[0][1]]
         self.state[move[0][0]][move[0][1]] = 0
 
-
+    def getState(self):
+        return self.state
     # returns 1 if successful, 0 if likely user error, - 1 if likely code error?, -2 if somehow nothing runs?
 
     # takes the new sensor map, if it is different, update the board.
@@ -91,3 +94,36 @@ class Board:
             
             
         return -2 # nothing ran some how????? this should never excute unless i'm low.
+    
+     
+     # returns 1 if successful, 0 if likely user error, - 1 if likely code error?, -2 if somehow nothing runs?
+
+    # takes the new sensor map, if it is different, update the board.
+    # note that self.state is not updated until a move is completed.
+    #better version that deals with negatives which makes life 10x easier
+    #WIP
+    # def processSensorsPolarity(self, newSensorMap):
+    #     x = 0
+    #     y = 0
+    #     updates = []
+    #     for i, layer in enumerate(newSensorMap):
+    #         for j, e in enumerate(layer):
+    #             if self.sensorMap[i][j] != e:
+    #                 updates.append((y, x, e))
+        
+    #     changes = len(updates)
+
+    #     # no updates
+    #     if changes == 0:
+    #         return 1
+        
+    #     newSensor = newSensorMap[y][x] # value of new sensor
+
+    #     #fails
+    #     if changes >= 3: # if more than two updates 
+    #         return 0
+    #     if (self.secondCoord != None) and (newSensor != 1):
+    #         pass
+
+
+    
