@@ -20,7 +20,7 @@ while True:
     board.digital[11].write(0)
     board.digital[12].write(0)
     board.digital[13].write(0)
-    if (i0 and i1 and i2 and i3)
+    if (i0 and i1 and i2 and i3):
         if abs(0.5 - i0) > 0.2:
             board.digital[10].write(1)
         if abs(0.5 - i1) > 0.2:
