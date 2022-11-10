@@ -1,24 +1,28 @@
 from pyfirmata import Arduino, util
-
-board = Arduino('COM3')
-
-iterator = util.Iterator(board)
-iterator.start()
-
-input0 = board.get_pin('a:0:i')
-input1 = board.get_pin('a:1:i')
-input2 = board.get_pin('a:2:i')
-input3 = board.get_pin('a:3:i')
+import stateManagement
+from tutorials import rookLevel
+from interfacing import sensorProcessing
+from gui import guiCombined
 
 
-while(True):
-    i = input1.read()
-    print(i)
-    board.digital[13].write(0)
-    #board.digital[12].write(0)
-    if i:
-        if i > 0.7:
-            board.digital[13].write(1)
-        #if i < 0.3:
-            #board.digital[12].write(1)
+MIN_THRESHOLD = 0.33
+MAX_THRESHOLD = 0.66
 
+running = True
+
+boardState =[
+        [rookLevel.allStates[0][0][0][0], rookLevel.allStates[0][0][0][1],0,0],
+        [rookLevel.allStates[0][0][1][0], rookLevel.allStates[0][0][1][1],0,0],
+        [0,0,0,0],
+        [0,0,0,0]
+    ]
+guiCombined.displayGame(boardState, -1)
+
+while running:
+    input0 = float(input("a0"))
+    input1 = float(input("a1"))
+    input2 = float(input("a2"))
+    input3 = float(input("a3"))
+
+
+    

@@ -1,8 +1,20 @@
 import pygame
-import globals
 import test
 import os,sys
 import re
+
+# def init(): 
+#     global gameState
+#     gameState = [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]]
+
+# if __name__=="__init__":
+#     init()
+
+
+#this file will be the file that updates the gameState and calls the gui function
+# def change(newState = [[1, 2, 3, 4], [5, 6, 0, 0], [0, 0, 7, 8], [9, 10, 11, 12]]):
+#     gameState = newState
+
 
 pygame.init() 
 def isLegal (piece):
@@ -10,10 +22,7 @@ def isLegal (piece):
 
     return legality
 
-
-
-
-def displayGame ():
+def displayGame (gameState, piece):
     pygame.font.init() 
     my_font = pygame.font.SysFont('Helvectia Nue Bold', 60)
     screen = pygame.display.set_mode([1100, 800])
@@ -24,9 +33,6 @@ def displayGame ():
 
     # none = 0; black pawn = 1; black rook = 2; black knight = 3; black bishop = 4; black queen = 5; black king = 6
     # white pawn = 7; white rook = 8; white knight = 9; white bishop = 10; white queen = 11; white king = 12
-    globals.init()
-    test.change()
-    gameState = globals.gameState
 
     chessPieces = []
     for (dirpath, dirnames, filenames) in os.walk(images_path):
@@ -35,11 +41,12 @@ def displayGame ():
                 chessPieces.append(os.path.join(images_path, file))
 
         break
-
+    
     for file in chessPieces:
         if ".DS_Store" in file:
             chessPieces.remove(file)
-        
+    
+    print(chessPieces)
 
 
     # chessPieces = [images_path+"Pawn.png", images_path+"Rook.png", images_path+"Knight.png", images_path+"Bishop.png", images_path+"Queen.png", images_path+"King.png", images_path+"PawnW.png", path+"RookW.png", path+"KnightW.png", path+"BishopW.png", path+"QueenW.png", +"KingW.png"]
@@ -49,7 +56,7 @@ def displayGame ():
             [[80, 400], [240, 400], [400, 400], [560, 400]],
             [[80, 560], [240, 560], [400, 560], [560, 560]]]
 
-    piece = 6
+    
 
     # Run until the user asks to quit
     running = True
@@ -68,8 +75,7 @@ def displayGame ():
 
         chosenPieceTxt = pygame.image.load('./gui/graphics/chosenPiece.png').convert_alpha()
         screen.blit(chosenPieceTxt, (800, 70))
-        if piece != -1:
-            chosenPieceImg = pygame.image.load(chessPieces[piece]).convert_alpha()
+        chosenPieceImg = pygame.image.load(chessPieces[piece]).convert_alpha()
         screen.blit(chosenPieceImg, (815, 180))
         pieceTxt = pygame.image.load( os.path.join(images_path, pieceStr[piece]) ).convert_alpha()
         screen.blit(pieceTxt, (755, 310))
@@ -97,3 +103,5 @@ def displayGame ():
         pygame.display.flip()
 
     pygame.quit()
+
+
