@@ -8,10 +8,10 @@ class BoardState:
         coord2 = move[1]
         self.state[coord1[0]][coord1[1]] = self.state[coord2[0]][coord2[1]] 
     
-    @getattr
+
     def getState(self):
         return self.state
 
-    
-    
+
+
 

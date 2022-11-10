@@ -11,7 +11,7 @@ class BoardProcessor:
         self.firstCoord = None
         self.secondCoord = None
 
-    @getattr
+
     def getFirstCoord(self):
         return self.firstCoord
 

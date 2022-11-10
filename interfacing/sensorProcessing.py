@@ -25,15 +25,15 @@ def processInput(input):
         return -1
     return 0
 
-test1 = getBoardState(0.3, 0.8, 0.5, 0.5)
-print(test1[0])
-print(test1[1])
+# test1 = getBoardState(0.3, 0.8, 0.5, 0.5)
+# print(test1[0])
+# print(test1[1])
 
-print()
+# print()
 
-test2 = getBoardState(0.3, 0.5, 0.5, 0.8)
-print(test2[0])
-print(test2[1])
+# test2 = getBoardState(0.3, 0.5, 0.5, 0.8)
+# print(test2[0])
+# print(test2[1])
 
 '''
 1 | 2

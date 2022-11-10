@@ -1,6 +1,6 @@
-rook = 5
+rook = 11
 empty = 0
-enemy = -1
+enemy = 4
 
 # For substate 0
 state0 = [[empty, enemy],
