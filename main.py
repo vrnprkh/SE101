@@ -5,10 +5,10 @@ board = Arduino('COM3')
 iterator = util.Iterator(board)
 iterator.start()
 
-input1 = board.get_pin('a:0:i')
-input2 = board.get_pin('a:1:i')
-input3 = board.get_pin('a:2:i')
-input4 = board.get_pin('a:3:i')
+input0 = board.get_pin('a:0:i')
+input1 = board.get_pin('a:1:i')
+input2 = board.get_pin('a:2:i')
+input3 = board.get_pin('a:3:i')
 
 
 while(True):
