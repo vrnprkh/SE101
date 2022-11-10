@@ -35,6 +35,7 @@ while running:
     i2 = input2.read()
     i3 = input3.read()
     if (i0 and i1 and i2 and i3):
+        print(i0, i1, i2, i3)
         newMap = sensorProcessing.getSensorMap(i0, i1, i2, i3)
         formattedMap = [
             newMap[0].extend(0,0),
