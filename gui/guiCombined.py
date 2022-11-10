@@ -1,7 +1,5 @@
 import pygame
-import test
 import os,sys
-import re
 
 # def init(): 
 #     global gameState
