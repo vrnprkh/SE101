@@ -38,6 +38,7 @@ class BoardProcessor:
         
         self.firstCoord = None
         self.secondCoord = None
+        self.subState = 0
 
 
     def getFirstCoord(self):
@@ -57,6 +58,10 @@ class BoardProcessor:
         newSensorValue = None
         changes = 0
         newCoord = None
+        print("self:")
+        print(self.sensorMap)
+        print("new:")
+        print(newSensorMap)
         for i, layer in enumerate(newSensorMap):
             for j, e in enumerate(layer):
                 if e != self.sensorMap[i][j]:
@@ -64,32 +69,43 @@ class BoardProcessor:
                     newCoord = (i, j)
                     newSensorValue = e
 
-        
-
         #FAILS
+
+        print("changes: " + str(changes))
+        print("new val: " + str(newSensorValue))
 
        
         if changes == 0:
             return 0
         
-         # more than one piece picked up
+         # more than one piece picked up FIXME
+        ''' 
         if changes >= 2:
+            print("error 1")
             return -1
+        
 
         # more than 2 pieces in hand
         if (self.secondCoord) and (newSensorValue == 0):
+            print("e2")
             return -1
         
-        # negative pieces in hand
+        # negative pieces in hand FIXME
+        
         if (not self.firstCoord) and (newSensorValue == 1):
+            print("e3")
             return -1
-        
-
+        '''
+        #print("new s val " + str(newSensorValue))
+        #print("new coord " + str(newCoord))
         # HAND EDITING
 
         # pick up first piece
-        if (not self.firstCoord) and (newSensorValue == 0):
+        #if (not self.firstCoord) and (newSensorValue == 0):
+        if (newSensorValue == 0):
             self.firstCoord = newCoord
+            self.sensorMap = newSensorMap
+            #print("picked up")
             return 1
         
         # place first piece
@@ -97,19 +113,38 @@ class BoardProcessor:
             # if same square
             if self.firstCoord == newCoord:
                 self.firstCoord = None
+                #print("same square put")
+                self.sensorMap = newSensorMap
                 return 1
+                
             # if new square
             else:
                 move = (self.firstCoord, newCoord)
+                print("move")
+                print(move)
+                #n = self.tutorial.checkLegal(move)
+                #print("legality:")
+                #print(n)
+                #if (n):
+                print("moves idk")
+                print(self.tutorial.subStates[self.subState])
                 if self.tutorial.checkLegal(move):
+                    '''
+                    if move in self.tutorial.subStates[self.subState][1]:
+                        index = self.tutorial.subStates[self.subState][]
+                        self.subState = self.tutorial.subStates[self.subState][1]
+                    '''
                     self.tutorial.makeMove(move)
                     self.boardState.updateState(move)
                     self.firstCoord = None
+                    self.sensorMap = newSensorMap
                     return 1
                 else:
                     # TODO decide what to do with self.firstCoord
+                    print("e6")
                     return -1
         
+        '''
         # pick up second piece
         if (self.firstCoord) and (not self.secondCoord) and (newSensorValue == 0):
             self.secondCoord = newCoord
@@ -118,6 +153,7 @@ class BoardProcessor:
         # capture
         if (self.firstCoord) and (self.secondCoord) and (newSensorValue == 1):
             if newCoord != self.secondCoord:
+                print("e4")
                 return -1
             else:
                 move = (self.firstCoord, self.secondCoord)
@@ -128,4 +164,6 @@ class BoardProcessor:
                     self.secondCoord = None
                     return 1
                 else:
+                    print("e5")
                     return -1
+        '''

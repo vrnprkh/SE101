@@ -3,13 +3,18 @@ LOWER_LIM = 0.4
 
 def getSensorMap(i1, i2, i3, i4):
     sensors = [
-        [i1, i2],
-        [i3, i4]
+        [i1, i2, 0, 0],
+        [i3, i4, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0]
+        #hardcoded for now, fix later
     ]
 
     boardState = [
-        [0, 0],
-        [0, 0]
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
     ]   
     for i in range(2):
         for j in range(2):
@@ -19,6 +24,8 @@ def getSensorMap(i1, i2, i3, i4):
 
 
 def processInput(input):
+    if (input == 0):
+        return 0 #temporary, get rid of me later
     if abs(input - 0.5) > 0.1:
         return 1
     return 0

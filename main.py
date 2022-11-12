@@ -3,7 +3,9 @@ from stateManagement import managerCombined
 from tutorials import rookLevel
 from interfacing import sensorProcessing
 from gui import guiCombined
-
+import pygame
+import time
+pygame.init()
 
 MIN_THRESHOLD = 0.33
 MAX_THRESHOLD = 0.66
@@ -30,27 +32,32 @@ input2 = breadboard.get_pin('a:2:i')
 input3 = breadboard.get_pin('a:3:i')
 
 while running:
+    time.sleep(1)
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT: 
+            running = False
+
     i0 = input0.read()
     i1 = input1.read()
     i2 = input2.read()
     i3 = input3.read()
-    if (i0 and i1 and i2 and i3):
-        print(i0, i1, i2, i3)
-        newMap = sensorProcessing.getSensorMap(i0, i1, i2, i3)
-        formattedMap = [
-            newMap[0].extend(0,0),
-            newMap[1].extend(0,0),
-            [0,0,0,0],
-            [0,0,0,0]
-        ]
 
-    result = game.update(formattedMap)
-    if result == 1:
-        guiCombined.displayGame(game.boardState.getState(), -1)
-    elif result == -1:
-        print("error :( user is dumb")
-    elif result == 0:
-        pass
+    if (i0 and i1 and i2 and i3):
+        #print(i0, i1, i2, i3)
+        
+        formattedMap = sensorProcessing.getSensorMap(i0, i1, i2, i3)
+
+        result = game.update(formattedMap)
+        print("result")
+        print(result)
+        if result == 1:
+            print("here")
+            guiCombined.displayGame(game.boardState.getState(), -1)
+        elif result == -1:
+            print("error :( user is dumb")
+        elif result == 0:
+            print("pass")
+            pass
 
 
     
