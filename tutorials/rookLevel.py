@@ -19,16 +19,16 @@ moves0 = [
 state1 = [[rook, enemy],
           [empty, empty]]
 moves1 = [ 
-    [[(0,0),(0,1)]],
-    [3]
+    [[(0,0),(0,1)], [(0,0), (0,0)]],
+    [3, 0]
 ]
 
 # For substate 2
 state2 = [[empty, enemy],
            [empty, rook]]
 moves2 = [ 
-    [[(1,1),(0,1)]],
-    [3]
+    [[(1,1),(0,1)], [(1,1), (1,0)]],
+    [3, 0]
 ]
 
 # For substate 3, the winning state
