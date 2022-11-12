@@ -34,15 +34,29 @@ class BoardProcessor:
     def __init__(self, state, tutorialData):
         self.boardState = BoardState(state)
         self.tutorial = TutorialLevel(tutorialData)
+        self.substates = tutorialData
         self.sensorMap = None
         
         self.firstCoord = None
         self.secondCoord = None
-        self.subState = 0
+        self.csubState = 0
+        self.l = [1, 2, 3, 4]
 
 
     def getFirstCoord(self):
         return self.firstCoord
+    
+    def isLegal(self, move):
+        print("hello i am runnigh :)))))))))))))))))))")
+        i = 0
+        for e in self.substates[self.csubState][1][0]:
+            if e[0] == move[0] and e[1] == move[1]:
+                self.csubState = self.substates[self.csubState][1][1][i]
+                print(i)
+                print("csub" + str(self.csubState))
+                return True
+            i = i + 1
+        return False
 
     # takes new sensors, updates self, and other states, SENSOR MAP ONLY 1S AND 0S
     def update(self, newSensorMap) -> int:
@@ -127,15 +141,18 @@ class BoardProcessor:
                 #print(n)
                 #if (n):
                 print("moves idk")
-                print(self.tutorial.subStates[self.subState])
-                if self.tutorial.checkLegal(move):
-                    '''
-                    if move in self.tutorial.subStates[self.subState][1]:
-                        index = self.tutorial.subStates[self.subState][]
-                        self.subState = self.tutorial.subStates[self.subState][1]
-                    '''
-                    self.tutorial.makeMove(move)
-                    self.boardState.updateState(move)
+                print(self.tutorial.subStates[self.csubState])
+                #if self.tutorial.checkLegal(move):
+                '''
+                if move in self.tutorial.subStates[self.subState][1]:
+                    index = self.tutorial.subStates[self.subState][]
+                    self.subState = self.tutorial.subStates[self.subState][1]
+                '''
+                n = self.isLegal(move)
+                print(n)
+                if n:
+                    #self.tutorial.makeMove(move)
+                    #self.boardState.updateState(move)
                     self.firstCoord = None
                     self.sensorMap = newSensorMap
                     return 1

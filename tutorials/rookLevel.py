@@ -2,26 +2,33 @@ rook = 8
 empty = 0
 enemy = 7
 
+# old format: origin, destination, substate that move leads to
+# new format: [(move 1), (move 2)]
+#             [substate from 1, substate from 2]
+
+
 # For substate 0
 state0 = [[empty, enemy],
           [rook, empty]]
 moves0 = [
-    [(1,0),(0,0), 1],  # origin, destination, substate that move leads to
-    [(1,0),(1,1), 2]
+    [[(1,0),(0,0)], [(1,0),(1,1)]],  
+    [1, 2]
 ]
 
 # For substate 1
 state1 = [[rook, enemy],
           [empty, empty]]
 moves1 = [ 
-    [(0,0),(0,1), 3]
+    [[(0,0),(0,1)]],
+    [3]
 ]
 
 # For substate 2
 state2 = [[empty, enemy],
            [empty, rook]]
 moves2 = [ 
-    [(1,1),(0,1), 3]
+    [[(1,1),(0,1)]],
+    [3]
 ]
 
 # For substate 3, the winning state
