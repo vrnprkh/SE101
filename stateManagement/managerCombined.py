@@ -152,7 +152,9 @@ class BoardProcessor:
                 print(n)
                 if n:
                     #self.tutorial.makeMove(move)
-                    #self.boardState.updateState(move)
+                    print(self.boardState.state)
+                    self.boardState.updateState(move)
+                    print(self.boardState.state)
                     self.firstCoord = None
                     self.sensorMap = newSensorMap
                     return 1
