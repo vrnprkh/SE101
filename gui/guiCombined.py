@@ -17,36 +17,41 @@ import re
 
 
 pygame.init() 
+base_path = os.path.dirname(__file__)
+images_path = os.path.join(base_path, "graphics")
+
+# none = 0; black pawn = 1; black rook = 2; black knight = 3; black bishop = 4; black queen = 5; black king = 6
+# white pawn = 7; white rook = 8; white knight = 9; white bishop = 10; white queen = 11; white king = 12
+
+chessPieces = []
+for (dirpath, dirnames, filenames) in os.walk(images_path):
+    for file in filenames:
+        if 'txt' not in file and 'chosen' not in file:
+
+            chessPieces.append(os.path.join(images_path, file))
+
+    break
+
+for file in chessPieces:
+    if ".DS_Store" in file:
+        chessPieces.remove(file)
+
+
+chessPieces.sort(key=lambda f: int(''.join(filter(str.isdigit, f))))
+#chessPieces.sort()
+print(chessPieces)
+
 def isLegal (piece):
     legality = True
 
     return legality
 
 def displayGame (gameState, piece):
-    pygame.font.init() 
-    my_font = pygame.font.SysFont('Helvectia Nue Bold', 60)
+
+    # pygame.font.init() 
+    # my_font = pygame.font.SysFont('Helvectia Nue Bold', 60)
     screen = pygame.display.set_mode([1100, 800])
     pygame.display.set_caption('NandanLabs')
-
-    base_path = os.path.dirname(__file__)
-    images_path = os.path.join(base_path, "graphics")
-
-    # none = 0; black pawn = 1; black rook = 2; black knight = 3; black bishop = 4; black queen = 5; black king = 6
-    # white pawn = 7; white rook = 8; white knight = 9; white bishop = 10; white queen = 11; white king = 12
-
-    chessPieces = []
-    for (dirpath, dirnames, filenames) in os.walk(images_path):
-        for file in filenames:
-            if 'txt' not in file and 'chosen' not in file:
-                chessPieces.append(os.path.join(images_path, file))
-
-        break
-    
-    for file in chessPieces:
-        if ".DS_Store" in file:
-            chessPieces.remove(file)
-    
-    print(chessPieces)
 
 
     # chessPieces = [images_path+"Pawn.png", images_path+"Rook.png", images_path+"Knight.png", images_path+"Bishop.png", images_path+"Queen.png", images_path+"King.png", images_path+"PawnW.png", path+"RookW.png", path+"KnightW.png", path+"BishopW.png", path+"QueenW.png", +"KingW.png"]
@@ -57,7 +62,6 @@ def displayGame (gameState, piece):
             [[80, 560], [240, 560], [400, 560], [560, 560]]]
 
     
-
     # Run until the user asks to quit
     running = True
     while running:
@@ -75,12 +79,11 @@ def displayGame (gameState, piece):
 
         chosenPieceTxt = pygame.image.load('./gui/graphics/chosenPiece.png').convert_alpha()
         screen.blit(chosenPieceTxt, (800, 70))
-        chosenPieceImg = pygame.image.load(chessPieces[piece]).convert_alpha()
+        chosenPieceImg = pygame.image.load(chessPieces[piece-1]).convert_alpha()
         screen.blit(chosenPieceImg, (815, 180))
-        pieceTxt = pygame.image.load( os.path.join(images_path, pieceStr[piece]) ).convert_alpha()
+        pieceTxt = pygame.image.load( os.path.join(images_path, pieceStr[piece-1]) ).convert_alpha()
         screen.blit(pieceTxt, (755, 310))
        
-
     
         # Draw the chessboard
         gray = (175, 171, 157)

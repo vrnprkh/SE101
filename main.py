@@ -16,7 +16,9 @@ boardState =[
         [0,0,0,0],
         [0,0,0,0]
     ]
-guiCombined.displayGame(boardState, -1)
+guiCombined.displayGame(boardState, 2)
+
+
 
 while running:
     input0 = float(input("a0"))
