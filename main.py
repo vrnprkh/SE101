@@ -37,6 +37,9 @@ while running:
         if event.type == pygame.QUIT: 
             running = False
 
+    if game.csubState == 3:
+        print("u win :)")
+        break
     i0 = input0.read()
     i1 = input1.read()
     i2 = input2.read()
@@ -48,6 +51,8 @@ while running:
         formattedMap = sensorProcessing.getSensorMap(i0, i1, i2, i3)
 
         result = game.update(formattedMap)
+        print("sub")
+        print(game.csubState)
         print("result")
         print(result)
         if result == 1:

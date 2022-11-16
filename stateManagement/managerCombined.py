@@ -47,7 +47,7 @@ class BoardProcessor:
         return self.firstCoord
     
     def isLegal(self, move):
-        print("hello i am runnigh :)))))))))))))))))))")
+        #print("hello i am runnigh :)))))))))))))))))))")
         i = 0
         for e in self.substates[self.csubState][1][0]:
             if e[0] == move[0] and e[1] == move[1]:
@@ -163,7 +163,7 @@ class BoardProcessor:
                     print("e6")
                     return -1
         
-        '''
+        
         # pick up second piece
         if (self.firstCoord) and (not self.secondCoord) and (newSensorValue == 0):
             self.secondCoord = newCoord
@@ -171,18 +171,18 @@ class BoardProcessor:
         
         # capture
         if (self.firstCoord) and (self.secondCoord) and (newSensorValue == 1):
-            if newCoord != self.secondCoord:
-                print("e4")
-                return -1
-            else:
-                move = (self.firstCoord, self.secondCoord)
-                if self.tutorial.checkLegal(move):
-                    self.tutorial.makeMove(move)
+            # if newCoord != self.secondCoord:
+            #     print("e4")
+            #     return -1
+            # else:
+            #     move = (self.firstCoord, self.secondCoord)
+            #     if self.tutorial.checkLegal(move):
+                    # self.tutorial.makeMove(move)
                     self.boardState.updateState(move)
                     self.firstCoord = None
                     self.secondCoord = None
                     return 1
-                else:
-                    print("e5")
-                    return -1
-        '''
+                # else:
+                #     print("e5")
+                #     return -1
+        

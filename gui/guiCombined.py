@@ -84,7 +84,7 @@ def displayGame (gameState, piece):
         
     pygame.display.flip()
     print(chessPieces)
-    print("HELLLLOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO!!!!!!!!!!!!")
+    #print("HELLLLOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO!!!!!!!!!!!!")
 
 
     
