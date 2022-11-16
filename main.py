@@ -1,9 +1,11 @@
 from pyfirmata import Arduino, util
-import stateManagement
+from stateManagement import managerCombined
 from tutorials import rookLevel
 from interfacing import sensorProcessing
 from gui import guiCombined
-
+import pygame
+import time
+pygame.init()
 
 MIN_THRESHOLD = 0.33
 MAX_THRESHOLD = 0.66
@@ -20,11 +22,50 @@ guiCombined.displayGame(boardState, 2)
 
 
 
+game = managerCombined.BoardProcessor(boardState, rookLevel.allStates)
+breadboard = Arduino('COM3')
+
+iterator = util.Iterator(breadboard)
+iterator.start()
+
+input0 = breadboard.get_pin('a:0:i')
+input1 = breadboard.get_pin('a:1:i')
+input2 = breadboard.get_pin('a:2:i')
+input3 = breadboard.get_pin('a:3:i')
+
 while running:
-    input0 = float(input("a0"))
-    input1 = float(input("a1"))
-    input2 = float(input("a2"))
-    input3 = float(input("a3"))
+    time.sleep(1)
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT: 
+            running = False
+
+    if game.csubState == 3:
+        print("u win :)")
+        break
+    i0 = input0.read()
+    i1 = input1.read()
+    i2 = input2.read()
+    i3 = input3.read()
+
+    if (i0 and i1 and i2 and i3):
+        #print(i0, i1, i2, i3)
+        
+        formattedMap = sensorProcessing.getSensorMap(i0, i1, i2, i3)
+
+        result = game.update(formattedMap)
+        print("sub")
+        print(game.csubState)
+        print("result")
+        print(result)
+        if result == 1:
+            print("here")
+            #guiCombined.displayGame(game.boardState.getState(), 1)
+            guiCombined.displayGame(game.sensorMap, -1)
+        elif result == -1:
+            print("error :( user is dumb")
+        elif result == 0:
+            print("pass")
+            pass
 
 
     
