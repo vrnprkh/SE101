@@ -21,7 +21,6 @@ boardState =[
 guiCombined.displayGame(boardState, 2)
 
 
-
 game = managerCombined.BoardProcessor(boardState, rookLevel.allStates)
 breadboard = Arduino('COM3')
 

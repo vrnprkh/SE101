@@ -2,23 +2,24 @@ UPPER_LIM = 0.7
 LOWER_LIM = 0.4
 
 def getSensorMap(i1, i2, i3, i4):
-    sensors = [
-        [i1, i2, 0, 0],
-        [i3, i4, 0, 0],
-        [0, 0, 0, 0],
-        [0, 0, 0, 0]
-        #hardcoded for now, fix later
-    ]
+    # sensors = [
+    #     [i1, i2, 0, 0],
+    #     [i3, i4, 0, 0],
+    #     [0, 0, 0, 0],
+    #     [0, 0, 0, 0]
+    #     #hardcoded for now, fix later
+    # ]
 
     boardState = [
+        [processInput(i1), processInput(i2), 0, 0],
+        [processInput(i3), processInput(i4), 0, 0],
         [0, 0, 0, 0],
         [0, 0, 0, 0],
-        [0, 0, 0, 0],
-        [0, 0, 0, 0],
-    ]   
-    for i in range(2):
-        for j in range(2):
-            boardState[i][j] = processInput(sensors[i][j])
+    ]
+
+    # for i in range(2):
+    #     for j in range(2):
+    #         boardState[i][j] = processInput(sensors[i][j])
     
     return boardState
 

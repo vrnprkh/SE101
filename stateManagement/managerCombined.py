@@ -3,7 +3,6 @@ class TutorialLevel:
     def __init__(self, subStates):        
         self.subStates = subStates
         self.current = 0
-
         self.sensorMap = None
     
     def checkLegal(self, move):
@@ -16,6 +15,7 @@ class TutorialLevel:
             for e in self.subStates[self.current][1]:
                 if e[:1] == move:
                     self.current = e[2]
+                    
 class BoardState:
     def __init__(self, state):
         self.state = state
@@ -29,33 +29,39 @@ class BoardState:
 
     def getState(self):
         return self.state
+
 # Tutorial data is substates
 class BoardProcessor:
     def __init__(self, state, tutorialData):
         self.boardState = BoardState(state)
         self.tutorial = TutorialLevel(tutorialData)
-        self.substates = tutorialData
+        # self.substates = tutorialData
         self.sensorMap = None
         
         self.firstCoord = None
         self.secondCoord = None
         self.csubState = 0
-        self.l = [1, 2, 3, 4]
+        # self.l = [1, 2, 3, 4]
 
-
-    def getFirstCoord(self):
+    @property
+    def csubstate(self):
+        return self.csubState
+    
+    @property
+    def firstCoord(self):
         return self.firstCoord
     
     def isLegal(self, move):
         #print("hello i am runnigh :)))))))))))))))))))")
         i = 0
-        for e in self.substates[self.csubState][1][0]:
+        for e in self.tutorial.subStates[self.csubState][1][0]:
             if e[0] == move[0] and e[1] == move[1]:
                 self.csubState = self.substates[self.csubState][1][1][i]
                 print(i)
-                print("csub" + str(self.csubState))
+                print("csub " + str(self.csubState))
                 return True
-            i = i + 1
+            i += 1
+            
         return False
 
     # takes new sensors, updates self, and other states, SENSOR MAP ONLY 1S AND 0S
@@ -88,35 +94,32 @@ class BoardProcessor:
         print("changes: " + str(changes))
         print("new val: " + str(newSensorValue))
 
-       
+        # no changes to board state
         if changes == 0:
             return 0
         
          # more than one piece picked up FIXME
-        ''' 
         if changes >= 2:
             print("error 1")
             return -1
         
-
         # more than 2 pieces in hand
         if (self.secondCoord) and (newSensorValue == 0):
             print("e2")
             return -1
         
         # negative pieces in hand FIXME
-        
         if (not self.firstCoord) and (newSensorValue == 1):
             print("e3")
             return -1
-        '''
+        
         #print("new s val " + str(newSensorValue))
         #print("new coord " + str(newCoord))
         # HAND EDITING
 
         # pick up first piece
-        #if (not self.firstCoord) and (newSensorValue == 0):
-        if (newSensorValue == 0):
+        if (not self.firstCoord) and (newSensorValue == 0):
+        # if (newSensorValue == 0):
             self.firstCoord = newCoord
             self.sensorMap = newSensorMap
             #print("picked up")
@@ -143,11 +146,11 @@ class BoardProcessor:
                 print("moves idk")
                 print(self.tutorial.subStates[self.csubState])
                 #if self.tutorial.checkLegal(move):
-                '''
-                if move in self.tutorial.subStates[self.subState][1]:
-                    index = self.tutorial.subStates[self.subState][]
-                    self.subState = self.tutorial.subStates[self.subState][1]
-                '''
+                
+                # if move in self.tutorial.subStates[self.subState][1]:
+                #     index = self.tutorial.subStates[self.subState][]
+                #     self.subState = self.tutorial.subStates[self.subState][1]
+                
                 n = self.isLegal(move)
                 print(n)
                 if n:
@@ -171,18 +174,18 @@ class BoardProcessor:
         
         # capture
         if (self.firstCoord) and (self.secondCoord) and (newSensorValue == 1):
-            # if newCoord != self.secondCoord:
-            #     print("e4")
-            #     return -1
-            # else:
-            #     move = (self.firstCoord, self.secondCoord)
-            #     if self.tutorial.checkLegal(move):
-                    # self.tutorial.makeMove(move)
+            if newCoord != self.secondCoord:
+                print("e4")
+                return -1
+            else:
+                move = (self.firstCoord, self.secondCoord)
+                if self.tutorial.checkLegal(move):
+                    self.tutorial.makeMove(move)
                     self.boardState.updateState(move)
                     self.firstCoord = None
                     self.secondCoord = None
                     return 1
-                # else:
-                #     print("e5")
-                #     return -1
+                else:
+                    print("e5")
+                    return -1
         
