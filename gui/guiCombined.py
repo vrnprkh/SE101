@@ -35,24 +35,19 @@ for file in chessPieces:
 
 
 chessPieces.sort(key=lambda f: int(''.join(filter(str.isdigit, f))))
-#chessPieces.sort()
 print(chessPieces)
 
-def isLegal (piece):
-    legality = True
+# def isLegal (piece):
+#     legality = True
+#     return legality
 
-    return legality
-
+# returns the condition that determines whether the user's move is valid or invalid
 def isValid(condtion = True):
     return condtion
 
 def displayGame (gameState, piece):
-
-    # pygame.font.init() 
-    # my_font = pygame.font.SysFont('Helvectia Nue Bold', 60)
     screen = pygame.display.set_mode([1100, 800])
     pygame.display.set_caption('NandanLabs')
-
 
     # chessPieces = [images_path+"Pawn.png", images_path+"Rook.png", images_path+"Knight.png", images_path+"Bishop.png", images_path+"Queen.png", images_path+"King.png", images_path+"PawnW.png", path+"RookW.png", path+"KnightW.png", path+"BishopW.png", path+"QueenW.png", +"KingW.png"]
     pieceStr = ["txtPawn.png", "txtRook.png", "txtKnight.png", "txtBishop.png", "txtQueen.png", "txtKing.png", "txtPawn.png", "txtRook.png", "txtKnight.png", "txtBishop.png", "txtQueen.png", "txtKing.png"]
@@ -61,7 +56,6 @@ def displayGame (gameState, piece):
             [[80, 400], [240, 400], [400, 400], [560, 400]],
             [[80, 560], [240, 560], [400, 560], [560, 560]]]
 
-    
     # Run until the user asks to quit
     running = True
     while running:
