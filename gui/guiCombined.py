@@ -24,8 +24,7 @@ images_path = os.path.join(base_path, "graphics")
 chessPieces = []
 for (dirpath, dirnames, filenames) in os.walk(images_path):
     for file in filenames:
-        if 'txt' not in file and 'chosen' not in file:
-
+        if 'txt' not in file and 'chosen' not in file and 'Move' not in file:
             chessPieces.append(os.path.join(images_path, file))
 
     break
@@ -36,21 +35,19 @@ for file in chessPieces:
 
 
 chessPieces.sort(key=lambda f: int(''.join(filter(str.isdigit, f))))
-#chessPieces.sort()
 print(chessPieces)
 
-def isLegal (piece):
-    legality = True
+# def isLegal (piece):
+#     legality = True
+#     return legality
 
-    return legality
+# returns the condition that determines whether the user's move is valid or invalid
+def isValid(condtion = True):
+    return condtion
 
 def displayGame (gameState, piece):
-
-    # pygame.font.init() 
-    # my_font = pygame.font.SysFont('Helvectia Nue Bold', 60)
     screen = pygame.display.set_mode([1100, 800])
     pygame.display.set_caption('NandanLabs')
-
 
     # chessPieces = [images_path+"Pawn.png", images_path+"Rook.png", images_path+"Knight.png", images_path+"Bishop.png", images_path+"Queen.png", images_path+"King.png", images_path+"PawnW.png", path+"RookW.png", path+"KnightW.png", path+"BishopW.png", path+"QueenW.png", +"KingW.png"]
     pieceStr = ["txtPawn.png", "txtRook.png", "txtKnight.png", "txtBishop.png", "txtQueen.png", "txtKing.png", "txtPawn.png", "txtRook.png", "txtKnight.png", "txtBishop.png", "txtQueen.png", "txtKing.png"]
@@ -59,7 +56,6 @@ def displayGame (gameState, piece):
             [[80, 400], [240, 400], [400, 400], [560, 400]],
             [[80, 560], [240, 560], [400, 560], [560, 560]]]
 
-    
     # Run until the user asks to quit
     running = True
     while running:
@@ -71,54 +67,42 @@ def displayGame (gameState, piece):
         screen.fill((40, 43, 47))
         pygame.draw.rect(screen, (75, 79, 84), pygame.Rect(750, 70, 280, (160*4)+20), 2, 3)
 
-    pygame.draw.rect(screen, (40, 43, 47), pygame.Rect(760, 80, 260, 360), 2)
-    
-    pygame.draw.rect(screen, (75, 79, 84), pygame.Rect(70, 70, (160*4)+20, (160*4)+20), 2, 3)
+        pygame.draw.rect(screen, (40, 43, 47), pygame.Rect(760, 80, 260, 360), 2)
+        
+        pygame.draw.rect(screen, (75, 79, 84), pygame.Rect(70, 70, (160*4)+20, (160*4)+20), 2, 3)
 
         chosenPieceTxt = pygame.image.load('./gui/graphics/chosenPiece.png').convert_alpha()
         screen.blit(chosenPieceTxt, (800, 70))
         chosenPieceImg = pygame.image.load(chessPieces[piece-1]).convert_alpha()
-        screen.blit(chosenPieceImg, (815, 180))
+        screen.blit(chosenPieceImg, (812, 180))
         pieceTxt = pygame.image.load( os.path.join(images_path, pieceStr[piece-1]) ).convert_alpha()
         screen.blit(pieceTxt, (755, 310))
-       
-    
-
-
-    # Draw the chessboard
-    gray = (175, 171, 157)
-    cream = (232, 233, 222)
-    x = 80
-    y = 80
-    for i in range (0, 4):
-        for j in range (0, 4):
-            if ((i%2 == 0 and j%2 == 0) or (i%2 != 0 and j%2 != 0)): colour = cream
-            else: colour = gray
-            pygame.draw.rect(screen, colour, pygame.Rect(x+(160*j), y+(160*i), 160, 160))
-
-    for i in range(len(gameState)):
-        for j in range(len(gameState[i])):
-            if (gameState[i][j] != 0):
-                img = pygame.image.load(chessPieces[gameState[i][j] - 1]).convert_alpha()
-                screen.blit(img, (coords[i][j][0], coords[i][j][1]))
-
         
-    pygame.display.flip()
-    print(chessPieces)
-    #print("HELLLLOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO!!!!!!!!!!!!")
-
-
-    
-    
-
-    # # Run until the user asks to quit
-    # running = True
-    # while running:
+        if (isValid()):
+            isValidImg = pygame.image.load("./gui/graphics/validMove.png").convert_alpha()
+        else:
+            isValidImg = pygame.image.load("./gui/graphics/invalidMove.png").convert_alpha()
         
-    #     # Closes window
-    #     for event in pygame.event.get():
-    #         if event.type == pygame.QUIT: running = False
+        screen.blit(isValidImg, (775, 400))
 
-       
+        # Draw the chessboard
+        gray = (175, 171, 157)
+        cream = (232, 233, 222)
+        x = 80
+        y = 80
+        for i in range (0, 4):
+            for j in range (0, 4):
+                if ((i%2 == 0 and j%2 == 0) or (i%2 != 0 and j%2 != 0)): colour = cream
+                else: colour = gray
+                pygame.draw.rect(screen, colour, pygame.Rect(x+(160*j), y+(160*i), 160, 160))
+
+        for i in range(len(gameState)):
+            for j in range(len(gameState[i])):
+                if (gameState[i][j] != 0):
+                    img = pygame.image.load(chessPieces[gameState[i][j] - 1]).convert_alpha()
+                    screen.blit(img, (coords[i][j][0], coords[i][j][1]))
+
+            
+        pygame.display.flip()
 
 

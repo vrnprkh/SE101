@@ -59,7 +59,7 @@ while running:
         if result == 1:
             print("here")
             #guiCombined.displayGame(game.boardState.getState(), 1)
-            guiCombined.displayGame(game.sensorMap, -1)
+            guiCombined.displayGame(game.sensorMap, 2)
         elif result == -1:
             print("error :( user is dumb")
         elif result == 0:
