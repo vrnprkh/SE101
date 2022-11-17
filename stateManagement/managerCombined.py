@@ -15,7 +15,7 @@ class TutorialLevel:
             for e in self.subStates[self.current][1]:
                 if e[:1] == move:
                     self.current = e[2]
-                    
+
 class BoardState:
     def __init__(self, state):
         self.state = state
@@ -151,9 +151,9 @@ class BoardProcessor:
                 #     index = self.tutorial.subStates[self.subState][]
                 #     self.subState = self.tutorial.subStates[self.subState][1]
                 
-                n = self.isLegal(move)
-                print(n)
-                if n:
+                legal = self.isLegal(move)
+                print(legal)
+                if legal:
                     #self.tutorial.makeMove(move)
                     print(self.boardState.state)
                     self.boardState.updateState(move)
