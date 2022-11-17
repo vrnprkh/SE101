@@ -26,8 +26,8 @@ class BoardState:
         coord2 = move[1]
         self.state[coord1[0]][coord1[1]] = self.state[coord2[0]][coord2[1]] 
     
-
-    def getState(self):
+    @property
+    def state(self):
         return self.state
 
 # Tutorial data is substates
@@ -51,6 +51,10 @@ class BoardProcessor:
     def firstCoord(self):
         return self.firstCoord
     
+    @property
+    def boardState(self):
+        return self.boardState
+
     def isLegal(self, move):
         #print("hello i am runnigh :)))))))))))))))))))")
         i = 0
