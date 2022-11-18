@@ -22,13 +22,17 @@ class BoardState:
     # move from (y1, x1) -> (y2, x2)
     # in the form ((y1, x1), (y2, x2))
     def updateState(self, move):
+        print("hellooooooooooooooooooo")
         coord1 = move[0]
         coord2 = move[1]
-        self.state[coord1[0]][coord1[1]] = self.state[coord2[0]][coord2[1]] 
+        # self.state[coord1[0]][coord1[1]] = self.state[coord2[0]][coord2[1]]
+        self.state[coord2[0]][coord2[1]] = self.state[coord1[0]][coord1[1]]
+        self.state[coord1[0]][coord1[1]] = 0
+         
     
-    @property
-    def state(self):
-        return self.state
+    #@property
+    #def state(self):
+        #return self.state
 
 # Tutorial data is substates
 class BoardProcessor:
@@ -43,24 +47,25 @@ class BoardProcessor:
         self.csubState = 0
         # self.l = [1, 2, 3, 4]
 
-    @property
-    def csubstate(self):
-        return self.csubState
+
+    # @property
+    # def csubstate(self):
+    #     return self.csubState
     
-    @property
-    def firstCoord(self):
-        return self.firstCoord
+    # @property
+    # def firstCoord(self):
+    #     return self.firstCoord
     
-    @property
-    def boardState(self):
-        return self.boardState
+    # @property
+    # def boardState(self):
+    #     return self.boardState
 
     def isLegal(self, move):
         #print("hello i am runnigh :)))))))))))))))))))")
         i = 0
         for e in self.tutorial.subStates[self.csubState][1][0]:
             if e[0] == move[0] and e[1] == move[1]:
-                self.csubState = self.substates[self.csubState][1][1][i]
+                self.csubState = self.tutorial.subStates[self.csubState][1][1][i]
                 print(i)
                 print("csub " + str(self.csubState))
                 return True
@@ -86,6 +91,8 @@ class BoardProcessor:
         print(self.sensorMap)
         print("new:")
         print(newSensorMap)
+        print("board state")
+        print(self.boardState.state)
         for i, layer in enumerate(newSensorMap):
             for j, e in enumerate(layer):
                 if e != self.sensorMap[i][j]:
@@ -102,36 +109,38 @@ class BoardProcessor:
         if changes == 0:
             return 0
         
-         # more than one piece picked up FIXME
+         # more than one piece picked up 
         if changes >= 2:
             print("error 1")
             return -1
         
         # more than 2 pieces in hand
-        if (self.secondCoord) and (newSensorValue == 0):
+        if (type(self.secondCoord) is tuple) and (newSensorValue == 0):
             print("e2")
             return -1
         
         # negative pieces in hand FIXME
-        if (not self.firstCoord) and (newSensorValue == 1):
-            print("e3")
-            return -1
+        
+        # if (self.firstCoord == None) and (newSensorValue == 1):
+        #     print("e3")
+        #     return -1
         
         #print("new s val " + str(newSensorValue))
         #print("new coord " + str(newCoord))
         # HAND EDITING
 
         # pick up first piece
-        if (not self.firstCoord) and (newSensorValue == 0):
+        if (self.firstCoord == None) and (newSensorValue == 0):
         # if (newSensorValue == 0):
             self.firstCoord = newCoord
             self.sensorMap = newSensorMap
-            #print("picked up")
+            print("picked up")
             return 1
         
         # place first piece
-        if self.firstCoord and (not self.secondCoord) and (newSensorValue == 1):
+        if (type(self.firstCoord) is tuple) and (self.secondCoord == None) and (newSensorValue == 1):
             # if same square
+            print("bawls")
             if self.firstCoord == newCoord:
                 self.firstCoord = None
                 #print("same square put")
@@ -159,8 +168,10 @@ class BoardProcessor:
                 print(legal)
                 if legal:
                     #self.tutorial.makeMove(move)
+                    print("old state:")
                     print(self.boardState.state)
                     self.boardState.updateState(move)
+                    print("new state:")
                     print(self.boardState.state)
                     self.firstCoord = None
                     self.sensorMap = newSensorMap
@@ -172,24 +183,28 @@ class BoardProcessor:
         
         
         # pick up second piece
-        if (self.firstCoord) and (not self.secondCoord) and (newSensorValue == 0):
+        if type(self.firstCoord) is tuple and (self.secondCoord == None) and (newSensorValue == 0):
+            print("hello i am here!!!!!!!!!!!!!!!!!!!!!!!")
             self.secondCoord = newCoord
+            self.sensorMap = newSensorMap 
             return 0
         
         # capture
-        if (self.firstCoord) and (self.secondCoord) and (newSensorValue == 1):
+        if type(self.firstCoord) is tuple and type(self.secondCoord) is tuple and (newSensorValue == 1): #XXX
             if newCoord != self.secondCoord:
                 print("e4")
                 return -1
             else:
                 move = (self.firstCoord, self.secondCoord)
-                if self.tutorial.checkLegal(move):
-                    self.tutorial.makeMove(move)
-                    self.boardState.updateState(move)
-                    self.firstCoord = None
-                    self.secondCoord = None
-                    return 1
-                else:
-                    print("e5")
-                    return -1
+                self.boardState.updateState(move)
+                return 2
+                # if self.tutorial.checkLegal(move):
+                #     self.tutorial.makeMove(move)
+                #     self.boardState.updateState(move)
+                #     self.firstCoord = None
+                #     self.secondCoord = None
+                #     return 2
+                # else:
+                #     print("e5")
+                #     return -1
         
