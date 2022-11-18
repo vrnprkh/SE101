@@ -45,7 +45,7 @@ print(chessPieces)
 def isValid(condtion = True):
     return condtion
 
-def displayGame (gameState, piece):
+def displayGame (gameState, piece = 0, highlighted = []):
     screen = pygame.display.set_mode([1100, 800])
     pygame.display.set_caption('NandanLabs')
 
@@ -73,10 +73,11 @@ def displayGame (gameState, piece):
 
     chosenPieceTxt = pygame.image.load('./gui/graphics/chosenPiece.png').convert_alpha()
     screen.blit(chosenPieceTxt, (800, 70))
-    chosenPieceImg = pygame.image.load(chessPieces[piece-1]).convert_alpha()
-    screen.blit(chosenPieceImg, (812, 180))
-    pieceTxt = pygame.image.load( os.path.join(images_path, pieceStr[piece-1]) ).convert_alpha()
-    screen.blit(pieceTxt, (755, 310))
+    if (piece != 0):
+        chosenPieceImg = pygame.image.load(chessPieces[piece-1]).convert_alpha()
+        screen.blit(chosenPieceImg, (812, 180))
+        pieceTxt = pygame.image.load( os.path.join(images_path, pieceStr[piece-1]) ).convert_alpha()
+        screen.blit(pieceTxt, (755, 310))
     
     if (isValid()):
         isValidImg = pygame.image.load("./gui/graphics/validMove.png").convert_alpha()
@@ -95,6 +96,12 @@ def displayGame (gameState, piece):
             if ((i%2 == 0 and j%2 == 0) or (i%2 != 0 and j%2 != 0)): colour = cream
             else: colour = gray
             pygame.draw.rect(screen, colour, pygame.Rect(x+(160*j), y+(160*i), 160, 160))
+
+    # highlights the square of the chosen piece
+    for element in highlighted:
+        row = highlighted[0]
+        col = highlighted[1]
+        pygame.draw.rect(screen, (218, 212, 129), pygame.Rect(x+(160*row), y+(160*col), 160, 160))
 
     for i in range(len(gameState)):
         for j in range(len(gameState[i])):
