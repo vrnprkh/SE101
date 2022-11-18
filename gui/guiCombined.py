@@ -45,7 +45,7 @@ print(chessPieces)
 def isValid(condtion = True):
     return condtion
 
-def displayGame (gameState, piece = 0, highlighted = [], condition = True):
+def displayGame (gameState, piece = 0, condition = True, highlighted = []):
     screen = pygame.display.set_mode([1100, 800])
     pygame.display.set_caption('NandanLabs')
 
@@ -99,10 +99,10 @@ def displayGame (gameState, piece = 0, highlighted = [], condition = True):
 
     # highlights the square of the chosen piece
     # rn it only takes in one array but take in multiple in the future to highlight multiple squares?
-    for element in highlighted:
-        row = element[0]
-        col = element[1]
-        pygame.draw.rect(screen, (218, 212, 129), pygame.Rect(x+(160*row), y+(160*col), 160, 160))
+    # for element in highlighted:
+    #     row = element[0]
+    #     col = element[1]
+    #     pygame.draw.rect(screen, (218, 212, 129), pygame.Rect(x+(160*row), y+(160*col), 160, 160))
 
     for i in range(len(gameState)):
         for j in range(len(gameState[i])):
