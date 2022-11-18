@@ -98,9 +98,10 @@ def displayGame (gameState, piece = 0, highlighted = []):
             pygame.draw.rect(screen, colour, pygame.Rect(x+(160*j), y+(160*i), 160, 160))
 
     # highlights the square of the chosen piece
+    # rn it only takes in one array but take in multiple in the future to highlight multiple squares?
     for element in highlighted:
-        row = highlighted[0]
-        col = highlighted[1]
+        row = element[0]
+        col = element[1]
         pygame.draw.rect(screen, (218, 212, 129), pygame.Rect(x+(160*row), y+(160*col), 160, 160))
 
     for i in range(len(gameState)):
