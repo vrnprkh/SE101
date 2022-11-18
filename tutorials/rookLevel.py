@@ -1,6 +1,6 @@
 rook = 8
 empty = 0
-enemy = 7
+enemy = 1
 
 # old format: origin, destination, substate that move leads to
 # new format: [(move 1), (move 2)]
