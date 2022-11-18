@@ -20,7 +20,7 @@ boardState =[
         [0,0,0,0],
         [0,0,0,0]
     ]
-guiCombined.displayGame(boardState, 2)
+guiCombined.displayGame(boardState, 0)
 
 #print("pleaseeeeeeeeeeeeeeeeeeeeeeeeee")
 
@@ -74,7 +74,7 @@ while running:
         if result == 2:
             guiCombined.displayGame(game.boardState.state, 8)
             time.sleep(5)
-            pygame.QUIT()
+            pygame.quit()
             break
         if result == 1:
             print("here")
