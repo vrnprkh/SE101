@@ -45,7 +45,7 @@ print(chessPieces)
 def isValid(condtion = True):
     return condtion
 
-def displayGame (gameState, piece = 0, highlighted = []):
+def displayGame (gameState, piece = 0, highlighted = [], condition = True):
     screen = pygame.display.set_mode([1100, 800])
     pygame.display.set_caption('NandanLabs')
 
@@ -79,7 +79,7 @@ def displayGame (gameState, piece = 0, highlighted = []):
         pieceTxt = pygame.image.load( os.path.join(images_path, pieceStr[piece-1]) ).convert_alpha()
         screen.blit(pieceTxt, (755, 310))
     
-    if (isValid()):
+    if (isValid(condition)):
         isValidImg = pygame.image.load("./gui/graphics/validMove.png").convert_alpha()
     else:
         isValidImg = pygame.image.load("./gui/graphics/invalidMove.png").convert_alpha()
