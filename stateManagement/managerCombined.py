@@ -22,7 +22,7 @@ class BoardState:
     # move from (y1, x1) -> (y2, x2)
     # in the form ((y1, x1), (y2, x2))
     def updateState(self, move):
-        print("hellooooooooooooooooooo")
+        # print("hellooooooooooooooooooo")
         coord1 = move[0]
         coord2 = move[1]
         # self.state[coord1[0]][coord1[1]] = self.state[coord2[0]][coord2[1]]
@@ -47,18 +47,6 @@ class BoardProcessor:
         self.csubState = 0
         # self.l = [1, 2, 3, 4]
 
-
-    # @property
-    # def csubstate(self):
-    #     return self.csubState
-    
-    # @property
-    # def firstCoord(self):
-    #     return self.firstCoord
-    
-    # @property
-    # def boardState(self):
-    #     return self.boardState
 
     def isLegal(self, move):
         #print("hello i am runnigh :)))))))))))))))))))")
@@ -131,7 +119,7 @@ class BoardProcessor:
 
         # pick up first piece
         if (self.firstCoord == None) and (newSensorValue == 0):
-        # if (newSensorValue == 0):
+
             self.firstCoord = newCoord
             self.sensorMap = newSensorMap
             print("picked up")
@@ -150,13 +138,13 @@ class BoardProcessor:
             # if new square
             else:
                 move = (self.firstCoord, newCoord)
-                print("move")
+                # print("move")
                 print(move)
                 #n = self.tutorial.checkLegal(move)
                 #print("legality:")
                 #print(n)
                 #if (n):
-                print("moves idk")
+                # print("moves idk")
                 print(self.tutorial.subStates[self.csubState])
                 #if self.tutorial.checkLegal(move):
                 
@@ -184,7 +172,7 @@ class BoardProcessor:
         
         # pick up second piece
         if type(self.firstCoord) is tuple and (self.secondCoord == None) and (newSensorValue == 0):
-            print("hello i am here!!!!!!!!!!!!!!!!!!!!!!!")
+            # print("hello i am here!!!!!!!!!!!!!!!!!!!!!!!")
             self.secondCoord = newCoord
             self.sensorMap = newSensorMap 
             return 0
