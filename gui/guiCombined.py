@@ -1,18 +1,6 @@
 import pygame
 import os,sys
-
-# def init(): 
-#     global gameState
-#     gameState = [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]]
-
-# if __name__=="__init__":
-#     init()
-
-
-#this file will be the file that updates the gameState and calls the gui function
-# def change(newState = [[1, 2, 3, 4], [5, 6, 0, 0], [0, 0, 7, 8], [9, 10, 11, 12]]):
-#     gameState = newState
-
+from stateManagement import tutorial
 
 pygame.init() 
 base_path = os.path.dirname(__file__)
@@ -37,15 +25,12 @@ for file in chessPieces:
 chessPieces.sort(key=lambda f: int(''.join(filter(str.isdigit, f))))
 print(chessPieces)
 
-# def isLegal (piece):
-#     legality = True
-#     return legality
 
 # returns the condition that determines whether the user's move is valid or invalid
 def isValid(condtion = True):
     return condtion
 
-def displayGame (gameState, piece = 0, condition = True, highlighted = []):
+def displayGame (gameState, piece = 0, condition = True, substate = [], highlighted = []):
     screen = pygame.display.set_mode([1100, 800])
     pygame.display.set_caption('NandanLabs')
 
@@ -56,19 +41,11 @@ def displayGame (gameState, piece = 0, condition = True, highlighted = []):
             [[80, 400], [240, 400], [400, 400], [560, 400]],
             [[80, 560], [240, 560], [400, 560], [560, 560]]]
 
-    # Run until the user asks to quit
     running = True
-    #while running:
-        
-        # Closes window
-        #for event in pygame.event.get():
-            #if event.type == pygame.QUIT: running = False
 
     screen.fill((40, 43, 47))
     pygame.draw.rect(screen, (75, 79, 84), pygame.Rect(750, 70, 280, (160*4)+20), 2, 3)
-
     pygame.draw.rect(screen, (40, 43, 47), pygame.Rect(760, 80, 260, 360), 2)
-    
     pygame.draw.rect(screen, (75, 79, 84), pygame.Rect(70, 70, (160*4)+20, (160*4)+20), 2, 3)
 
     chosenPieceTxt = pygame.image.load('./gui/graphics/chosenPiece.png').convert_alpha()
@@ -97,13 +74,15 @@ def displayGame (gameState, piece = 0, condition = True, highlighted = []):
             else: colour = gray
             pygame.draw.rect(screen, colour, pygame.Rect(x+(160*j), y+(160*i), 160, 160))
 
-    # highlights the square of the chosen piece
-    # rn it only takes in one array but take in multiple in the future to highlight multiple squares?
-    # for element in highlighted:
-    #     row = element[0]
-    #     col = element[1]
-    #     pygame.draw.rect(screen, (218, 212, 129), pygame.Rect(x+(160*row), y+(160*col), 160, 160))
+    
+    # Highlights the possible squares the player can move their piece to
+    moves = substate[1]
+    for element in moves [0]:
+        row = element [1][0]
+        col = element [1][1]
+        pygame.draw.rect(screen, (80, 155, 103), pygame.Rect(x+(160*row), y+(160*col), 160, 160))
 
+    # Draws the chess pieces onto the board
     for i in range(len(gameState)):
         for j in range(len(gameState[i])):
             if (gameState[i][j] != 0):
