@@ -1,10 +1,11 @@
 from pyfirmata import Arduino, util
 from stateManagement import managerCombined
-from tutorials import rookLevel
+from tutorials import rookLevel, bishopLevel, queenLevel
 from interfacing import sensorProcessing
 from gui import guiCombined
 import pygame
 import time
+import random
 
 #print("oh my god")
 
@@ -14,9 +15,11 @@ MAX_THRESHOLD = 0.66
 
 running = True
 
+randomLevel = random.choice([rookLevel, bishopLevel, queenLevel])
+
 boardState =[
-        [rookLevel.allStates[0][0][0][0], rookLevel.allStates[0][0][0][1],0,0],
-        [rookLevel.allStates[0][0][1][0], rookLevel.allStates[0][0][1][1],0,0],
+        [randomLevel.allStates[0][0][0][0], randomLevel.allStates[0][0][0][1],0,0],
+        [randomLevel.allStates[0][0][1][0], randomLevel.allStates[0][0][1][1],0,0],
         [0,0,0,0],
         [0,0,0,0]
     ]
@@ -24,7 +27,7 @@ guiCombined.displayGame(boardState, 0)
 
 #print("pleaseeeeeeeeeeeeeeeeeeeeeeeeee")
 
-game = managerCombined.BoardProcessor(boardState, rookLevel.allStates)
+game = managerCombined.BoardProcessor(boardState, randomLevel.allStates)
 breadboard = Arduino('COM3')
 
 iterator = util.Iterator(breadboard)
