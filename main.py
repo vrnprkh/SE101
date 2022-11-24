@@ -86,6 +86,8 @@ while running:
         elif result == -1:
             print("error :( user is dumb")
             guiCombined.displayGame(game.boardState.state, 8, False)
+
+
         elif result == 0:
             print("pass")
             pass
