@@ -1,3 +1,5 @@
+from illegalMove import LegalMoveProcessor
+
 class TutorialLevel:
     #Substates is a list, of substates, each having a list of legal moves
     def __init__(self, subStates):        
@@ -44,18 +46,18 @@ class BoardProcessor:
         # self.l = [1, 2, 3, 4]
 
 
-    def isLegal(self, piece, move):
-        #print("hello i am runnigh :)))))))))))))))))))")
-        i = 0
-        for e in self.tutorial.subStates[self.csubState][1][0]:
-            if e[0] == move[0] and e[1] == move[1]:
-                self.csubState = self.tutorial.subStates[self.csubState][1][1][i]
-                print(i)
-                print("csub " + str(self.csubState))
-                return True
-            i += 1
+    # def isLegal(self, piece, move):
+    #     #print("hello i am runnigh :)))))))))))))))))))")
+    #     i = 0
+    #     for e in self.tutorial.subStates[self.csubState][1][0]:
+    #         if e[0] == move[0] and e[1] == move[1]:
+    #             self.csubState = self.tutorial.subStates[self.csubState][1][1][i]
+    #             print(i)
+    #             print("csub " + str(self.csubState))
+    #             return True
+    #         i += 1
             
-        return False
+    #     return False
 
     # takes new sensors, updates self, and other states, SENSOR MAP ONLY 1S AND 0S
     def update(self, newSensorMap) -> int:
@@ -149,7 +151,7 @@ class BoardProcessor:
                 #     index = self.tutorial.subStates[self.subState][]
                 #     self.subState = self.tutorial.subStates[self.subState][1]
                 
-                legal = self.isLegal(piece, move)
+                legal = LegalMoveProcessor.isLegal(self, move)
                 print(legal)
                 if legal:
                     #self.tutorial.makeMove(move)
