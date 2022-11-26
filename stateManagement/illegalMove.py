@@ -28,11 +28,6 @@ class BoardState:
         # self.state[coord1[0]][coord1[1]] = self.state[coord2[0]][coord2[1]]
         self.state[coord2[0]][coord2[1]] = self.state[coord1[0]][coord1[1]]
         self.state[coord1[0]][coord1[1]] = 0
-         
-    
-    #@property
-    #def state(self):
-        #return self.state
 
 # Tutorial data is substates
 class BoardProcessor:

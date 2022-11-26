@@ -29,10 +29,6 @@ class BoardState:
         self.state[coord2[0]][coord2[1]] = self.state[coord1[0]][coord1[1]]
         self.state[coord1[0]][coord1[1]] = 0
          
-    
-    #@property
-    #def state(self):
-        #return self.state
 
 # Tutorial data is substates
 class BoardProcessor:
@@ -48,7 +44,7 @@ class BoardProcessor:
         # self.l = [1, 2, 3, 4]
 
 
-    def isLegal(self, move):
+    def isLegal(self, piece, move):
         #print("hello i am runnigh :)))))))))))))))))))")
         i = 0
         for e in self.tutorial.subStates[self.csubState][1][0]:
@@ -75,6 +71,7 @@ class BoardProcessor:
         newSensorValue = None
         changes = 0
         newCoord = None
+        piece = None
         print("self:")
         print(self.sensorMap)
         print("new:")
@@ -152,7 +149,7 @@ class BoardProcessor:
                 #     index = self.tutorial.subStates[self.subState][]
                 #     self.subState = self.tutorial.subStates[self.subState][1]
                 
-                legal = self.isLegal(move)
+                legal = self.isLegal(piece, move)
                 print(legal)
                 if legal:
                     #self.tutorial.makeMove(move)
