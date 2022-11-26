@@ -23,3 +23,151 @@ class LegalMoveProcessor:
 
         
         return False
+
+
+
+class Cell:
+    def __init__(self) -> None:
+        self.legalNextMove = False
+        self.currentlyOccupied = False
+
+class LegalMoves:
+    def __init__(self, piece) -> None:
+        self.size = 4
+        self.piece = piece
+        self.theGrid = [ [Cell() for j in range(self.size)] for i in range(self.size) ]
+
+    def MarkNextLegalMoves(self, piece, position) -> None:
+        #Step 1 - clear all previoous legal moves
+        for i in range(self.size):
+            for j in range(self.size):
+                self.theGrid[i][j].legalNextMove = False
+                self.theGrid[i][j].currentlyOccupied = False
+
+        #Step 2 - find all legal moves and mark the cells as "legal"
+        if piece == "Pawn":
+            self.theGrid[position[0]][position[1] + 1].legalNextMove = True
+            self.theGrid[position[0] + 1][position[1] + 1].legalNextMove = True
+            self.theGrid[position[0] - 1][position[1] + 1].legalNextMove = True
+            return
+
+        if piece == "Knight":
+            self.theGrid[position[0] + 2][position[1] + 1].legalNextMove = True
+            self.theGrid[position[0] + 2][position[1] - 1].legalNextMove = True
+            self.theGrid[position[0] - 2][position[1] + 1].legalNextMove = True
+            self.theGrid[position[0] - 2][position[1] - 1].legalNextMove = True
+            self.theGrid[position[0] + 1][position[1] + 2].legalNextMove = True
+            self.theGrid[position[0] + 1][position[1] - 2].legalNextMove = True
+            self.theGrid[position[0] - 1][position[1] + 2].legalNextMove = True
+            self.theGrid[position[0] - 1][position[1] - 2].legalNextMove = True
+            return
+
+        if piece == "King":
+            self.theGrid[position[0]][position[1] + 1].legalNextMove = True
+            self.theGrid[position[0]][position[1] - 1].legalNextMove = True
+            self.theGrid[position[0] + 1][position[1]].legalNextMove = True
+            self.theGrid[position[0] - 1][position[1]].legalNextMove = True
+            self.theGrid[position[0] + 1][position[1] + 1].legalNextMove = True
+            self.theGrid[position[0] + 1][position[1] - 1].legalNextMove = True
+            self.theGrid[position[0] - 1][position[1] + 1].legalNextMove = True
+            self.theGrid[position[0] - 1][position[1] - 1].legalNextMove = True
+            return
+
+        if piece == "Rook":
+            pos = [position[0] + 1, position[1] + 1]
+            while pos[0] < self.size:
+                self.theGrid[pos[0]][pos[1]].legalNextMove = True
+                pos[0] += 1
+
+            pos = [position[0] + 1, position[1] + 1]
+            while pos[0] < self.size:
+                self.theGrid[pos[0]][pos[1]].legalNextMove = True
+                pos[0] -= 1
+
+            pos = [position[0] + 1, position[1] + 1]
+            while pos[0] < self.size:
+                self.theGrid[pos[0]][pos[1]].legalNextMove = True
+                pos[1] += 1
+
+            pos = [position[0] + 1, position[1] + 1]
+            while pos[0] < self.size:
+                self.theGrid[pos[0]][pos[1]].legalNextMove = True
+                pos[1] -= 1
+
+            return
+
+        if piece == "Bishop":
+            pos = [position[0] + 1, position[1] + 1]
+            while pos[0] < self.size:
+                self.theGrid[pos[0]][pos[1]].legalNextMove = True
+                pos[0] += 1
+                pos[1] += 1
+
+            pos = [position[0] + 1, position[1] + 1]
+            while pos[0] < self.size:
+                self.theGrid[pos[0]][pos[1]].legalNextMove = True
+                pos[0] -= 1
+                pos[1] += 1
+
+            pos = [position[0] + 1, position[1] + 1]
+            while pos[0] < self.size:
+                self.theGrid[pos[0]][pos[1]].legalNextMove = True
+                pos[0] += 1
+                pos[1] -= 1
+
+            pos = [position[0] + 1, position[1] + 1]
+            while pos[0] < self.size:
+                self.theGrid[pos[0]][pos[1]].legalNextMove = True
+                pos[0] -= 1
+                pos[1] -= 1        
+            
+            return
+
+        if piece == "Queen":
+            pos = [position[0] + 1, position[1] + 1]
+            while pos[0] < self.size:
+                self.theGrid[pos[0]][pos[1]].legalNextMove = True
+                pos[0] += 1
+                pos[1] += 1
+
+            pos = [position[0] + 1, position[1] + 1]
+            while pos[0] < self.size:
+                self.theGrid[pos[0]][pos[1]].legalNextMove = True
+                pos[0] -= 1
+                pos[1] += 1
+
+            pos = [position[0] + 1, position[1] + 1]
+            while pos[0] < self.size:
+                self.theGrid[pos[0]][pos[1]].legalNextMove = True
+                pos[0] += 1
+                pos[1] -= 1
+
+            pos = [position[0] + 1, position[1] + 1]
+            while pos[0] < self.size:
+                self.theGrid[pos[0]][pos[1]].legalNextMove = True
+                pos[0] -= 1
+                pos[1] -= 1   
+
+            pos = [position[0] + 1, position[1] + 1]
+            while pos[0] < self.size:
+                self.theGrid[pos[0]][pos[1]].legalNextMove = True
+                pos[0] += 1
+
+            pos = [position[0] + 1, position[1] + 1]
+            while pos[0] < self.size:
+                self.theGrid[pos[0]][pos[1]].legalNextMove = True
+                pos[0] -= 1
+
+            pos = [position[0] + 1, position[1] + 1]
+            while pos[0] < self.size:
+                self.theGrid[pos[0]][pos[1]].legalNextMove = True
+                pos[1] += 1
+
+            pos = [position[0] + 1, position[1] + 1]
+            while pos[0] < self.size:
+                self.theGrid[pos[0]][pos[1]].legalNextMove = True
+                pos[1] -= 1    
+
+            return
+
+        return
