@@ -24,10 +24,6 @@ class LegalMoveProcessor:
         
         return False
 
-    @staticmethod
-    def generateLegalMoves(piece, size):
-        Gride = [ [False for j in range(self.size)] for i in range(size) ]
-
 
 
 class Cell:
