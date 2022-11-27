@@ -1,9 +1,22 @@
-enemy = 1
+enemy = -1
 MAX = 3
 MIN = 0
 
 def isLegal(piece, move, boardState):
-    return 0
+    if (piece == "king") and move[1] in kingLegal(move[0][0], move[0][1], boardState):
+        return True
+    elif (piece == "queen") and move[1] in queenLegal(move[0][0], move[0][1], boardState):
+        return True
+    elif (piece == "bishop") and move[1] in bishopLegal(move[0][0], move[0][1], boardState):
+        return True
+    elif (piece == "rook") and move[1] in rookLegal(move[0][0], move[0][1], boardState):
+        return True
+    elif (piece == "pawn") and move[1] in pawnLegal(move[0][0], move[0][1], boardState):
+        return True
+    elif (piece == "knight") and move[1] in knightLegal(move[0][0], move[0][1], boardState):
+        return True
+    else:
+        return False
 
 def kingLegal(row, col, boardState):
     moves = []
@@ -38,10 +51,31 @@ def queenLegal(row, col, boardState):
     
 
 
-def knightLegal(cx, cy, x, y):
-    if (abs(x - cx) == 2 and abs(y - cy) == 1) or (abs(x - cx) == 1 and abs(y - cy) == 2):
-        return True
-    return False
+def knightLegal(row, col, boardState):
+    moves = []
+    if boardState[row + 1][col + 2] == 0 or boardState[row + 1][col + 2] == enemy:
+        moves.append((row + 1, col + 2))
+
+    if boardState[row + 1][col - 2] == 0 or boardState[row + 1][col - 2] == enemy:
+        moves.append((row + 1, col - 2))
+
+    if boardState[row - 1][col + 2] == 0 or boardState[row - 1][col + 2] == enemy:
+        moves.append((row - 1, col + 2))
+
+    if boardState[row - 1][col - 2] == 0 or boardState[row - 1][col - 2] == enemy:
+        moves.append((row - 1, col - 2))
+
+    if boardState[row + 2][col + 1] == 0 or boardState[row + 2][col + 1] == enemy:
+        moves.append((row + 2, col + 1))
+
+    if boardState[row + 2][col - 1] == 0 or boardState[row + 2][col - 1] == enemy:
+        moves.append((row + 1, col + 2))
+
+    if boardState[row - 2][col + 1] == 0 or boardState[row - 2][col + 1] == enemy:
+        moves.append((row + 1, col + 2))
+
+    if boardState[row - 2][col - 1] == 0 or boardState[row - 2][col - 1] == enemy:
+        moves.append((row - 2, col - 1))
 
 def rookLegal(row, col, boardState):
     moves = []
@@ -119,4 +153,14 @@ def bishopLegal(row, col, boardState):
     return moves
 
 def pawnLegal(row, col, boardState):
+    moves = []
     if boardState[row][col + 1] == 0 or boardState[row][col + 1] == enemy:
+        moves.append((row, col + 1))
+
+    if boardState[row + 1][col + 1] == enemy:
+        moves.append((row + 1, col + 1))
+    
+    if boardState[row - 1][col + 1] == enemy:
+        moves.append((row - 1, col + 1))
+    
+    return moves
