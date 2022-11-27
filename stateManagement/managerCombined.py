@@ -1,4 +1,5 @@
 from illegalMove import LegalMoveProcessor
+from PieceLegalMove import Constants
 
 class TutorialLevel:
     #Substates is a list, of substates, each having a list of legal moves
@@ -30,7 +31,18 @@ class BoardState:
         # self.state[coord1[0]][coord1[1]] = self.state[coord2[0]][coord2[1]]
         self.state[coord2[0]][coord2[1]] = self.state[coord1[0]][coord1[1]]
         self.state[coord1[0]][coord1[1]] = 0
-         
+
+    def formatBoardState(self):
+        #We will consider any black pieces as being the opponent 
+            #White pieces have a value in the range [7...12]
+        copy_state = [ [i for i in row] for row in self.state ]
+        
+        for row in copy_state:
+            for col in row:
+                if col in [7, 8, 9, 10, 11, 12]:
+                    copy_state[row][col] = Constants.enemy
+
+        return copy_state
 
 # Tutorial data is substates
 class BoardProcessor:

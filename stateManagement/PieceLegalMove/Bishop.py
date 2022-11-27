@@ -24,7 +24,7 @@ def bishopLegal(row, col, boardState):
     r = row
     c = col
 
-    while r >= MAX and c <= MAX:
+    while r >= MIN and c <= MAX:
         r -= 1
         c += 1
         if boardState[r][c] != 0 and boardState[r][c] != enemy:
@@ -34,7 +34,7 @@ def bishopLegal(row, col, boardState):
     r = row
     c = col
 
-    while r >= MAX and c >= MAX:
+    while r >= MIN and c >= MIN:
         r -= 1
         c -= 1
         if boardState[r][c] != 0 and boardState[r][c] != enemy:
