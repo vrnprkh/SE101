@@ -1,5 +1,5 @@
 from managerCombined import BoardProcessor, BoardState
-from PieceLegalMove import Bishop, King, Knight, Pawn, Queen, Rook
+from PieceLegalMove import Bishop, King, Knight, Pawn, Queen, Rook, Constants
 
 # Tutorial data is substates
 class LegalMoveProcessor:
@@ -57,27 +57,30 @@ class Cell:
 
 class LegalMoves:
     def __init__(self, piece) -> None:
-        self.size = 4
+        self.size = Constants.BS #Basing the max size off of this but it's okay
         self.piece = piece
         self.theGrid = [ [Cell() for j in range(self.size)] for i in range(self.size) ]
 
-    def PawnNextLegalMoves(self, position):
+    def PawnNextLegalMoves(self, state, position):
         for i in range(self.size):
             for j in range(self.size):
                 self.theGrid[i][j].legalNextMove = False
-                self.theGrid[i][j].currentlyOccupied = False
+                self.theGrid[i][j].currentlyOccupied = False if state[i][j] == Constants.enemy else True
 
-        self.theGrid[position[0]][position[1] + 1].legalNextMove = True if position[1] + 1 < self.size else False
-        self.theGrid[position[0] + 1][position[1] + 1].legalNextMove = True if position[0] + 1 < self.size and position[1] + 1 < self.size else False
-        self.theGrid[position[0] - 1][position[1] + 1].legalNextMove = True if position[0] - 1 > -1 and position[1] + 1 < self.size else False 
+        if position[1] + 1 < self.size and not self.theGrid[position[0]][position[1] + 1].currentlyOccupied:
+            self.theGrid[position[0]][position[1] + 1].legalNextMove = True
+        if position[0] + 1 < self.size and position[1] + 1 < self.size and self.theGrid[position[0]][position[1] + 1].currentlyOccupied:
+            self.theGrid[position[0] + 1][position[1] + 1].legalNextMove = True
+        if position[0] - 1 > -1 and position[1] + 1 < self.size and self.theGrid[position[0]][position[1] + 1].currentlyOccupied:
+            self.theGrid[position[0] - 1][position[1] + 1].legalNextMove = True
 
         return self.theGrid.copy()
 
-    def KnightNextLegalMoves(self, position):
+    def KnightNextLegalMoves(self, state, position):
         for i in range(self.size):
             for j in range(self.size):
                 self.theGrid[i][j].legalNextMove = False
-                self.theGrid[i][j].currentlyOccupied = False
+                self.theGrid[i][j].currentlyOccupied = False if state[i][j] == Constants.enemy else True
 
         self.theGrid[position[0] + 2][position[1] + 1].legalNextMove = True if position[0] + 2 < self.size and position[1] + 1 < self.size else False
         self.theGrid[position[0] + 2][position[1] - 1].legalNextMove = True if position[0] + 2 < self.size and position[1] + 1 < self.size else False
@@ -90,72 +93,96 @@ class LegalMoves:
 
         return self.theGrid.copy()
 
-    def BishopNextLegalMoves(self, position):
+    def BishopNextLegalMoves(self, state, position):
         for i in range(self.size):
             for j in range(self.size):
                 self.theGrid[i][j].legalNextMove = False
-                self.theGrid[i][j].currentlyOccupied = False
+                self.theGrid[i][j].currentlyOccupied = False if state[i][j] == Constants.enemy else True
 
         pos = [position[0] + 1, position[1] + 1]
         while pos[0] < self.size:
             self.theGrid[pos[0]][pos[1]].legalNextMove = True
+            if self.theGrid[pos[0]][pos[1]].currentlyOccupied == True:
+                break
+                
             pos[0] += 1
             pos[1] += 1
 
         pos = [position[0] - 1, position[1] + 1]
         while pos[0] > -1 and pos[1] < self.size:
             self.theGrid[pos[0]][pos[1]].legalNextMove = True
+            if self.theGrid[pos[0]][pos[1]].currentlyOccupied == True:
+                break
+
             pos[0] -= 1
             pos[1] += 1
 
         pos = [position[0] + 1, position[1] - 1]
         while pos[0] < self.size and pos[1] > -1:
             self.theGrid[pos[0]][pos[1]].legalNextMove = True
+            if self.theGrid[pos[0]][pos[1]].currentlyOccupied == True:
+                break
+
             pos[0] += 1
             pos[1] -= 1
 
         pos = [position[0] - 1, position[1] - 1]
         while pos[0] > -1 and pos[1] > -1:
             self.theGrid[pos[0]][pos[1]].legalNextMove = True
+            if self.theGrid[pos[0]][pos[1]].currentlyOccupied == True:
+                break
+
             pos[0] -= 1
             pos[1] -= 1 
 
         return self.theGrid.copy()
 
-    def RookNextLegalMoves(self, position):
+    def RookNextLegalMoves(self, state, position):
         for i in range(self.size):
             for j in range(self.size):
                 self.theGrid[i][j].legalNextMove = False
-                self.theGrid[i][j].currentlyOccupied = False
+                self.theGrid[i][j].currentlyOccupied = False if state[i][j] == Constants.enemy else True
 
         pos = [position[0] + 1, position[1]]
         while pos[0] < self.size:
             self.theGrid[pos[0]][pos[1]].legalNextMove = True
+            if self.theGrid[pos[0]][pos[1]].currentlyOccupied == True:
+                break
+
             pos[0] += 1
 
         pos = [position[0] - 1, position[1]]
         while pos[0] > -1:
             self.theGrid[pos[0]][pos[1]].legalNextMove = True
+            if self.theGrid[pos[0]][pos[1]].currentlyOccupied == True:
+                break
+
             pos[0] -= 1
 
         pos = [position[0], position[1] + 1]
         while pos[1] < self.size:
             self.theGrid[pos[0]][pos[1]].legalNextMove = True
+            if self.theGrid[pos[0]][pos[1]].currentlyOccupied == True:
+                break
+
             pos[1] += 1
 
         pos = [position[0], position[1] - 1]
         while pos[0] > -1:
             self.theGrid[pos[0]][pos[1]].legalNextMove = True
+            if self.theGrid[pos[0]][pos[1]].currentlyOccupied == True:
+                break
+            
             pos[1] -= 1
 
         return self.theGrid.copy()
 
 
-    def QueenNextLegalMoves(self, position):
+    def QueenNextLegalMoves(self, state, position):
         for i in range(self.size):
             for j in range(self.size):
                 self.theGrid[i][j].legalNextMove = False
-                self.theGrid[i][j].currentlyOccupied = False
+                self.theGrid[i][j].currentlyOccupied = False if state[i][j] == Constants.enemy else True
 
         rookMoves = self.RookNextLegalMoves(position)
         bishopMoves = self.BishopNextLegalMoves(position)
@@ -170,11 +197,11 @@ class LegalMoves:
 
         return self.theGrid.copy()
 
-    def KingNextLegalMoves(self, position):
+    def KingNextLegalMoves(self, state, position):
         for i in range(self.size):
             for j in range(self.size):
                 self.theGrid[i][j].legalNextMove = False
-                self.theGrid[i][j].currentlyOccupied = False  
+                self.theGrid[i][j].currentlyOccupied = False if state[i][j] == Constants.enemy else True
 
         self.theGrid[position[0]][position[1] + 1].legalNextMove = True if position[1] + 1 < self.size else False
         self.theGrid[position[0]][position[1] - 1].legalNextMove = True if position[1] - 1 > -1 else False
