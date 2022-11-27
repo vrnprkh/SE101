@@ -1,4 +1,5 @@
-from boardProcessor import BoardProcessor
+from managerCombined import BoardProcessor, BoardState
+from PieceLegalMove import Bishop, King, Knight, Pawn, Queen, Rook
 
 # Tutorial data is substates
 class LegalMoveProcessor:
@@ -16,20 +17,39 @@ class LegalMoveProcessor:
         return False
 
     @staticmethod
-    def isLegal(boardProcessor: BoardProcessor, move):
+    def isLegal(boardProcessor: BoardProcessor, move, piece: str):
         #print("hello i am runnigh :)))))))))))))))))))")
         if not boardProcessor.tutorial == None:
             return LegalMoveProcessor.isLegalTutorialMove(move);
 
+        if piece == "pawn":
+            return Pawn.pawnLegal(move[0], move[1], boardProcessor.boardState)
+
+        if piece == "knight":
+            # return Knight.knightLegal(move[0], move[1], boardProcessor.boardState)
+            return True
+
+        if piece == "bishop":
+            return Bishop.bishopLegal(move[0], move[1], boardProcessor.boardState)
+
+        if piece == "rook":
+            return Rook.rookLegal(move[0], move[1], boardProcessor.boardState)
         
+        if piece == "queen":
+            return Queen.queenLegal(move[0], move[1], boardProcessor.boardState)
+
+        if piece == "king":
+            return King.kingLegal(move[0], move[1], boardProcessor.boardState)
+
         return False
 
-    @staticmethod
-    def generateLegalMoves(piece, size):
-        Gride = [ [False for j in range(self.size)] for i in range(size) ]
+    # @staticmethod
+    # def generateLegalMoves(piece: str, row, col, boardState: BoardState):
+    #     if piece == "pawn":
+    #         return 
 
 
-
+"""
 class Cell:
     def __init__(self) -> None:
         self.legalNextMove = False
@@ -175,3 +195,4 @@ class LegalMoves:
             return
 
         return
+"""
