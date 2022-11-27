@@ -10,9 +10,12 @@ images_path = os.path.join(base_path, "graphics")
 # white pawn = 7; white rook = 8; white knight = 9; white bishop = 10; white queen = 11; white king = 12
 
 chessPieces = []
+tutorialImages = []
 for (dirpath, dirnames, filenames) in os.walk(images_path):
     for file in filenames:
         if 'txt' not in file and 'chosen' not in file and 'Move' not in file and 'Tutorial' not in file:
+            chessPieces.append(os.path.join(images_path, file))
+        if 'Tutorial' in file:
             chessPieces.append(os.path.join(images_path, file))
 
     break
@@ -20,22 +23,11 @@ for (dirpath, dirnames, filenames) in os.walk(images_path):
 for file in chessPieces:
     if ".DS_Store" in file:
         chessPieces.remove(file)
+        tutorialImages.remove(file)
 
         
 chessPieces.sort(key=lambda f: int(''.join(filter(str.isdigit, f))))
 print(chessPieces)
-
-tutorialImages = []
-for (dirpath, dirnames, filenames) in os.walk(images_path):
-    for file in filenames: 
-        if 'Tutorial' in file:
-            chessPieces.append(os.path.join(images_path, file))
-    break
-
-for file in tutorialImages:
-    if ".DS_Store" in file:
-        tutorialImages.remove(file)
-
 tutorialImages.sort(key=lambda f: int(''.join(filter(str.isdigit, f))))
 
 
