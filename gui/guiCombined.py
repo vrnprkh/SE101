@@ -12,7 +12,7 @@ images_path = os.path.join(base_path, "graphics")
 chessPieces = []
 for (dirpath, dirnames, filenames) in os.walk(images_path):
     for file in filenames:
-        if 'txt' not in file and 'chosen' not in file and 'Move' not in file:
+        if 'txt' not in file and 'chosen' not in file and 'Move' not in file and 'Tutorial' not in file:
             chessPieces.append(os.path.join(images_path, file))
 
     break
@@ -21,9 +21,22 @@ for file in chessPieces:
     if ".DS_Store" in file:
         chessPieces.remove(file)
 
-
+        
 chessPieces.sort(key=lambda f: int(''.join(filter(str.isdigit, f))))
 print(chessPieces)
+
+tutorialImages = []
+for (dirpath, dirnames, filenames) in os.walk(images_path):
+    for file in filenames: 
+        if 'Tutorial' in file:
+            chessPieces.append(os.path.join(images_path, file))
+    break
+
+for file in tutorialImages:
+    if ".DS_Store" in file:
+        tutorialImages.remove(file)
+
+tutorialImages.sort(key=lambda f: int(''.join(filter(str.isdigit, f))))
 
 
 # returns the condition that determines whether the user's move is valid or invalid
@@ -82,6 +95,13 @@ def displayGame (gameState, piece = 0, condition = True, substate = [], highligh
         col = element [1][1]
         pygame.draw.rect(screen, (80, 155, 103), pygame.Rect(x+(160*row), y+(160*col), 160, 160))
 
+    # Displays the mini tutorial on the side
+    if piece > 6: tutorialNum = piece - 6
+    else: tutorialNum = piece
+    
+    tutorialImg = pygame.image.load(chessPieces[tutorialImages[tutorialNum] - 1]).convert_alpha()
+    screen.blit(tutorialImg, (775, 700)) #edit: prob need to change the coords 
+    
     # Draws the chess pieces onto the board
     for i in range(len(gameState)):
         for j in range(len(gameState[i])):
