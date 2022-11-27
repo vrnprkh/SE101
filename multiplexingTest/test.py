@@ -3,19 +3,24 @@ import time
 import itertools
 
 
-breadboard = Arduino('COM3')
 
-input0 = breadboard.get_pin('a:0:i')
+breadboard = Arduino('COM5')
+iterator = util.Iterator(breadboard)
+iterator.start()
+input0 = breadboard.get_pin('a:1:i')
 
-data = [0,0,0,0]
+data = [0,0,0,0,0,0,0,0]
 
 list(itertools.product([0, 1], repeat=3))
 
 while True:
     for i, el in enumerate(list(itertools.product([0, 1], repeat=3))): #list of all combinations of 3 bits
-        breadboard.digital[10], breadboard.digital[11], breadboard.digital[12] = el
-        time.sleep(0.1)
-        data[i] = input.read()
+        print(el)
+        breadboard.digital[5].write(el[2])
+        breadboard.digital[6].write(el[1])
+        breadboard.digital[7].write(el[0]) 
+        time.sleep(0.2)
+        data[i] = input0.read()
 
     # breadboard.digital[10].write(0)
     # breadboard.digital[11].write(0)
