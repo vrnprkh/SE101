@@ -2,12 +2,13 @@ from pyfirmata import Arduino, util
 import time
 import itertools
 
-
 breadboard = Arduino('COM3')
+iterator = util.Iterator(board)
+iterator.start()
 
 input0 = breadboard.get_pin('a:0:i')
 
-data = [0,0,0,0]
+data = [0, 0, 0, 0, 0, 0, 0]
 
 list(itertools.product([0, 1], repeat=3))
 
@@ -15,7 +16,7 @@ while True:
     for i, el in enumerate(list(itertools.product([0, 1], repeat=3))): #list of all combinations of 3 bits
         breadboard.digital[10], breadboard.digital[11], breadboard.digital[12] = el
         time.sleep(0.1)
-        data[i] = input.read()
+        data[i] = input0.read()
 
     # breadboard.digital[10].write(0)
     # breadboard.digital[11].write(0)
