@@ -43,5 +43,4 @@ substate1 = [state1, moves1]
 substate2 = [state2, moves2]
 substate3 = [state3, moves3]
 
-
 allStates = [substate0, substate1, substate2, substate3]

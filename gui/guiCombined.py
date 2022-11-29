@@ -1,5 +1,6 @@
 import pygame
 import os,sys
+from ..stateManagement import tutorial
 from stateManagement import tutorial
 from stateManagement import illegalMove
 
