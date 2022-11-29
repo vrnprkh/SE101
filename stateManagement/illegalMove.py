@@ -1,11 +1,11 @@
-from managerCombined import BoardProcessor, BoardState
+import managerCombined
 import PieceLegalMove
 #from PieceLegalMove import Bishop, King, Knight, Pawn, Queen, Rook, Constants
 
 # Tutorial data is substates
 class LegalMoveProcessor:
     @staticmethod
-    def isLegalTutorialMove(boardProcessor: BoardProcessor, move):
+    def isLegalTutorialMove(boardProcessor: managerCombined.BoardProcessor, move):
         i = 0
         for e in boardProcessor.tutorial.subStates[boardProcessor.csubState][1][0]:
             if e[0] == move[0] and e[1] == move[1]:
@@ -18,34 +18,34 @@ class LegalMoveProcessor:
         return False
 
     @staticmethod
-    def isLegal(boardProcessor: BoardProcessor, move, piece: str):
+    def isLegal(boardProcessor: managerCombined.BoardProcessor, move, piece: str):
         #print("hello i am runnigh :)))))))))))))))))))")
         if not boardProcessor.tutorial == None:
             return LegalMoveProcessor.isLegalTutorialMove(move);
 
         if piece == "pawn":
-            return Pawn.pawnLegal(move[0], move[1], boardProcessor.boardState.formatBoardState())
+            return PieceLegalMove.pawnLegal(move[0], move[1], boardProcessor.boardState.formatBoardState())
 
         if piece == "knight":
             # return Knight.knightLegal(move[0], move[1], boardProcessor.boardState)
             return True
 
         if piece == "bishop":
-            return Bishop.bishopLegal(move[0], move[1], boardProcessor.boardState.formatBoardState())
+            return PieceLegalMove.Bishop.bishopLegal(move[0], move[1], boardProcessor.boardState.formatBoardState())
 
         if piece == "rook":
-            return Rook.rookLegal(move[0], move[1], boardProcessor.boardState.formatBoardState())
+            return PieceLegalMove.Rook.rookLegal(move[0], move[1], boardProcessor.boardState.formatBoardState())
         
         if piece == "queen":
-            return Queen.queenLegal(move[0], move[1], boardProcessor.boardState.formatBoardState())
+            return PieceLegalMove.queenLegal(move[0], move[1], boardProcessor.boardState.formatBoardState())
 
         if piece == "king":
-            return King.kingLegal(move[0], move[1], boardProcessor.boardState.formatBoardState())
+            return PieceLegalMove.kingLegal(move[0], move[1], boardProcessor.boardState.formatBoardState())
 
         return False
 
     @staticmethod
-    def generateLegalMoves(piece: str, row, col, boardState: BoardState):
+    def generateLegalMoves(piece: str, row, col, boardState: managerCombined.BoardState):
         if piece == "pawn":
             return 
 
@@ -58,7 +58,7 @@ class Cell:
 
 class LegalMoves:
     def __init__(self, piece) -> None:
-        self.size = Constants.BS #Basing the max size off of this but it's okay
+        self.size = PieceLegalMove.Constants.BS #Basing the max size off of this but it's okay
         self.piece = piece
         self.theGrid = [ [Cell() for j in range(self.size)] for i in range(self.size) ]
 
@@ -66,7 +66,7 @@ class LegalMoves:
         for i in range(self.size):
             for j in range(self.size):
                 self.theGrid[i][j].legalNextMove = False
-                self.theGrid[i][j].currentlyOccupied = False if state[i][j] == Constants.enemy else True
+                self.theGrid[i][j].currentlyOccupied = False if state[i][j] == PieceLegalMove.Constants.enemy else True
 
         if position[1] + 1 < self.size and not self.theGrid[position[0]][position[1] + 1].currentlyOccupied:
             self.theGrid[position[0]][position[1] + 1].legalNextMove = True
@@ -81,7 +81,7 @@ class LegalMoves:
         for i in range(self.size):
             for j in range(self.size):
                 self.theGrid[i][j].legalNextMove = False
-                self.theGrid[i][j].currentlyOccupied = False if state[i][j] == Constants.enemy else True
+                self.theGrid[i][j].currentlyOccupied = False if state[i][j] == PieceLegalMove.Constants.enemy else True
 
         self.theGrid[position[0] + 2][position[1] + 1].legalNextMove = True if position[0] + 2 < self.size and position[1] + 1 < self.size else False
         self.theGrid[position[0] + 2][position[1] - 1].legalNextMove = True if position[0] + 2 < self.size and position[1] + 1 < self.size else False
@@ -98,7 +98,7 @@ class LegalMoves:
         for i in range(self.size):
             for j in range(self.size):
                 self.theGrid[i][j].legalNextMove = False
-                self.theGrid[i][j].currentlyOccupied = False if state[i][j] == Constants.enemy else True
+                self.theGrid[i][j].currentlyOccupied = False if state[i][j] == PieceLegalMove.Constants.enemy else True
 
         pos = [position[0] + 1, position[1] + 1]
         while pos[0] < self.size:
@@ -142,7 +142,7 @@ class LegalMoves:
         for i in range(self.size):
             for j in range(self.size):
                 self.theGrid[i][j].legalNextMove = False
-                self.theGrid[i][j].currentlyOccupied = False if state[i][j] == Constants.enemy else True
+                self.theGrid[i][j].currentlyOccupied = False if state[i][j] == PieceLegalMove.Constants.enemy else True
 
         pos = [position[0] + 1, position[1]]
         while pos[0] < self.size:
@@ -183,7 +183,7 @@ class LegalMoves:
         for i in range(self.size):
             for j in range(self.size):
                 self.theGrid[i][j].legalNextMove = False
-                self.theGrid[i][j].currentlyOccupied = False if state[i][j] == Constants.enemy else True
+                self.theGrid[i][j].currentlyOccupied = False if state[i][j] == PieceLegalMove.Constants.enemy else True
 
         rookMoves = self.RookNextLegalMoves(position)
         bishopMoves = self.BishopNextLegalMoves(position)
@@ -202,7 +202,7 @@ class LegalMoves:
         for i in range(self.size):
             for j in range(self.size):
                 self.theGrid[i][j].legalNextMove = False
-                self.theGrid[i][j].currentlyOccupied = False if state[i][j] == Constants.enemy else True
+                self.theGrid[i][j].currentlyOccupied = False if state[i][j] == PieceLegalMove.Constants.enemy else True
 
         self.theGrid[position[0]][position[1] + 1].legalNextMove = True if position[1] + 1 < self.size else False
         self.theGrid[position[0]][position[1] - 1].legalNextMove = True if position[1] - 1 > -1 else False

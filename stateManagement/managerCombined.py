@@ -1,5 +1,6 @@
 import illegalMove
-import PieceLegalMove.Constants
+import PieceLegalMove
+
 class TutorialLevel:
     #Substates is a list, of substates, each having a list of legal moves
     def __init__(self, subStates):        
@@ -39,7 +40,7 @@ class BoardState:
         for row in copy_state:
             for col in row:
                 if col in [7, 8, 9, 10, 11, 12]:
-                    copy_state[row][col] = Constants.enemy
+                    copy_state[row][col] = PieceLegalMove.Constants.enemy
 
         return copy_state
 
@@ -84,7 +85,7 @@ class BoardProcessor:
         newSensorValue = None
         changes = 0
         newCoord = None
-        piece = None
+        # piece = None
         print("self:")
         print(self.sensorMap)
         print("new:")
@@ -162,7 +163,7 @@ class BoardProcessor:
                 #     index = self.tutorial.subStates[self.subState][]
                 #     self.subState = self.tutorial.subStates[self.subState][1]
                 
-                legal = LegalMoveProcessor.isLegal(self, move)
+                legal = illegalMove.LegalMoveProcessor.isLegal(self, move)
                 print(legal)
                 if legal:
                     #self.tutorial.makeMove(move)
