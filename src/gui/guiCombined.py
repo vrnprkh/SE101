@@ -61,9 +61,9 @@ def displayGame (gameState, piece = 0, condition = True, substate = [], highligh
         screen.blit(pieceTxt, (755, 310))
     
     if (isValid(condition)):
-        isValidImg = pygame.image.load("./gui/graphics/validMove.png").convert_alpha()
+        isValidImg = pygame.image.load(os.path.join(os.path.dirname(__file__), "graphics", "validMove.png")).convert_alpha()
     else:
-        isValidImg = pygame.image.load("./gui/graphics/invalidMove.png").convert_alpha()
+        isValidImg = pygame.image.load(os.path.join(os.path.dirname(__file__), "graphics", "invalidMove.png")).convert_alpha()
     
     screen.blit(isValidImg, (775, 400))
 

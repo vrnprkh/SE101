@@ -3,8 +3,8 @@ from . import illegalMove
 
 class BoardProcessor:
     def __init__(self, state, tutorialData):
-        self.boardState = BoardState(state)
-        self.tutorial = TutorialLevel(tutorialData)
+        self.boardState = BoardState.BoardState(state)
+        self.tutorial = TutorialLevel.TutorialLevel(tutorialData)
         self.sensorMap = None
         
         self.firstCoord = None
