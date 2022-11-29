@@ -1,0 +1,124 @@
+from . import BoardState, TutorialLevel
+from . import illegalMove
+
+class BoardProcessor:
+    def __init__(self, state, tutorialData):
+        self.boardState = BoardState(state)
+        self.tutorial = TutorialLevel(tutorialData)
+        self.sensorMap = None
+        
+        self.firstCoord = None
+        self.secondCoord = None
+        self.csubState = 0
+        # self.l = [1, 2, 3, 4]
+
+    # takes new sensors, updates self, and other states, SENSOR MAP ONLY 1S AND 0S
+    def update(self, newSensorMap) -> int:
+        '''
+        Returns 0 if no display update
+        Returns 1 if display update is needed
+        Returns -1 for illegal move / error
+        '''
+        if not self.sensorMap: # if no old sensor data
+            self.sensorMap = newSensorMap
+            return 0
+        
+        newSensorValue = None
+        changes = 0
+        newCoord = None
+        # piece = None
+        print("self:")
+        print(self.sensorMap)
+        print("new:")
+        print(newSensorMap)
+        print("board state")
+        print(self.boardState.state)
+        for i, layer in enumerate(newSensorMap):
+            for j, e in enumerate(layer):
+                if e != self.sensorMap[i][j]:
+                    changes += 1
+                    newCoord = (i, j)
+                    newSensorValue = e
+
+        #FAILS
+
+        print("changes: " + str(changes))
+        print("new val: " + str(newSensorValue))
+
+        # no changes to board state
+        if changes == 0:
+            return 0
+        
+         # more than one piece picked up 
+        if changes >= 2:
+            print("error 1")
+            return -1
+        
+        # more than 2 pieces in hand
+        if (type(self.secondCoord) is tuple) and (newSensorValue == 0):
+            print("e2")
+            return -1
+        
+        # negative pieces in hand FIXME
+        # HAND EDITING
+
+        # pick up first piece
+        if (self.firstCoord == None) and (newSensorValue == 0):
+
+            self.firstCoord = newCoord
+            self.sensorMap = newSensorMap
+            print("picked up")
+            return 1
+        
+        # place first piece
+        if (type(self.firstCoord) is tuple) and (self.secondCoord == None) and (newSensorValue == 1):
+            # if same square
+            print("bawls")
+            if self.firstCoord == newCoord:
+                self.firstCoord = None
+                #print("same square put")
+                self.sensorMap = newSensorMap
+                return 1
+                
+            # if new square
+            else:
+                move = (self.firstCoord, newCoord)
+                # print("move")
+                print(move)
+
+                print(self.tutorial.subStates[self.csubState])
+                
+                legal = illegalMove.LegalMoveProcessor.isLegal(self, move)
+                print(legal)
+                if legal:
+                    #self.tutorial.makeMove(move)
+                    print("old state:")
+                    print(self.boardState.state)
+                    self.boardState.updateState(move)
+                    print("new state:")
+                    print(self.boardState.state)
+                    self.firstCoord = None
+                    self.sensorMap = newSensorMap
+                    return 1
+                else:
+                    # TODO decide what to do with self.firstCoord
+                    print("e6")
+                    return -1
+        
+        
+        # pick up second piece
+        if type(self.firstCoord) is tuple and (self.secondCoord == None) and (newSensorValue == 0):
+            # print("hello i am here!!!!!!!!!!!!!!!!!!!!!!!")
+            self.secondCoord = newCoord
+            self.sensorMap = newSensorMap 
+            return 0
+        
+        # capture
+        if type(self.firstCoord) is tuple and type(self.secondCoord) is tuple and (newSensorValue == 1): #XXX
+            if newCoord != self.secondCoord:
+                print("e4")
+                return -1
+            else:
+                move = (self.firstCoord, self.secondCoord)
+                self.boardState.updateState(move)
+                return 2
