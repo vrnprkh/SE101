@@ -61,9 +61,9 @@ def displayGame (gameState, piece = 0, condition = True, substate = [], highligh
         screen.blit(pieceTxt, (755, 310))
     
     if (isValid(condition)):
-        isValidImg = pygame.image.load("./gui/graphics/validMove.png").convert_alpha()
+        isValidImg = pygame.image.load(os.path.join(os.path.dirname(__file__), "graphics", "validMove.png")).convert_alpha()
     else:
-        isValidImg = pygame.image.load("./gui/graphics/invalidMove.png").convert_alpha()
+        isValidImg = pygame.image.load(os.path.join(os.path.dirname(__file__), "graphics", "invalidMove.png")).convert_alpha()
     
     screen.blit(isValidImg, (775, 400))
 
@@ -80,18 +80,18 @@ def displayGame (gameState, piece = 0, condition = True, substate = [], highligh
 
     
     # Highlights the possible squares the player can move their piece to
-    moves = substate[1]
-    for element in moves [0]:
-        row = element [1][0]
-        col = element [1][1]
-        pygame.draw.rect(screen, (80, 155, 103), pygame.Rect(x+(160*row), y+(160*col), 160, 160))
+    # moves = substate[1]
+    # for element in moves [0]:
+    #     row = element [1][0]
+    #     col = element [1][1]
+    #     pygame.draw.rect(screen, (80, 155, 103), pygame.Rect(x+(160*row), y+(160*col), 160, 160))
 
-    # Displays the mini tutorial on the side
-    if piece > 6: tutorialNum = piece - 6
-    else: tutorialNum = piece
+    # # Displays the mini tutorial on the side
+    # if piece > 6: tutorialNum = piece - 6
+    # else: tutorialNum = piece
     
-    tutorialImg = pygame.image.load(chessPieces[tutorialImages[tutorialNum] - 1]).convert_alpha()
-    screen.blit(tutorialImg, (775, 700)) #edit: prob need to change the coords 
+    # tutorialImg = pygame.image.load(chessPieces[tutorialImages[tutorialNum] - 1]).convert_alpha()
+    # screen.blit(tutorialImg, (775, 700)) #edit: prob need to change the coords 
     
     # Draws the chess pieces onto the board
     for i in range(len(gameState)):

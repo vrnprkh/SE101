@@ -27,7 +27,9 @@ boardState =[
 print(boardState)
 guiCombined.displayGame(boardState, 0, True, randomLevel.allStates)
 
-game = BoardProcessor(boardState, randomLevel.allStates)
+#print("pleaseeeeeeeeeeeeeeeeeeeeeeeeee")
+
+game = BoardProcessor.BoardProcessor(boardState, randomLevel.allStates)
 breadboard = Arduino('COM3')
 iterator = util.Iterator(breadboard)
 iterator.start()
