@@ -52,7 +52,7 @@ def displayGame (gameState, piece = 0, condition = True, substate = [], highligh
     pygame.draw.rect(screen, (40, 43, 47), pygame.Rect(760, 80, 260, 360), 2)
     pygame.draw.rect(screen, (75, 79, 84), pygame.Rect(70, 70, (160*4)+20, (160*4)+20), 2, 3)
 
-    chosenPieceTxt = pygame.image.load('./gui/graphics/chosenPiece.png').convert_alpha()
+    chosenPieceTxt = pygame.image.load( os.path.join(os.path.dirname(__file__), "graphics", "chosenPiece.png") ).convert_alpha()
     screen.blit(chosenPieceTxt, (800, 70))
     if (piece != 0):
         chosenPieceImg = pygame.image.load(chessPieces[piece-1]).convert_alpha()
