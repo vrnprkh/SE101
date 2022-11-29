@@ -1,5 +1,6 @@
 from managerCombined import BoardProcessor, BoardState
-from PieceLegalMove import Bishop, King, Knight, Pawn, Queen, Rook, Constants
+import PieceLegalMove
+#from PieceLegalMove import Bishop, King, Knight, Pawn, Queen, Rook, Constants
 
 # Tutorial data is substates
 class LegalMoveProcessor:

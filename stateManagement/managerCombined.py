@@ -1,6 +1,5 @@
-from illegalMove import LegalMoveProcessor
-from PieceLegalMove import Constants
-
+import illegalMove
+import PieceLegalMove.Constants
 class TutorialLevel:
     #Substates is a list, of substates, each having a list of legal moves
     def __init__(self, subStates):        

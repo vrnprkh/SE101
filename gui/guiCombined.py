@@ -1,6 +1,7 @@
 import pygame
 import os,sys
 from stateManagement import tutorial
+from stateManagement import illegalMove
 
 pygame.init() 
 base_path = os.path.dirname(__file__)
@@ -101,7 +102,7 @@ def displayGame (gameState, piece = 0, condition = True, substate = [], highligh
                 img = pygame.image.load(chessPieces[gameState[i][j] - 1]).convert_alpha()
                 screen.blit(img, (coords[i][j][0], coords[i][j][1]))
 
-        
+    
     pygame.display.flip()
 
 

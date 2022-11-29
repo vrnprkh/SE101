@@ -1,5 +1,6 @@
 from pyfirmata import Arduino, util
-from stateManagement import managerCombined
+import stateManagement
+#from stateManagement import managerCombined, illegalMove
 from tutorials import rookLevel, bishopLevel, queenLevel
 from interfacing import sensorProcessing
 from gui import guiCombined
