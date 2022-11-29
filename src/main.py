@@ -8,6 +8,7 @@ from gui import guiCombined
 import pygame
 import time
 import random
+import itertools
 
 pygame.init()
 MIN_THRESHOLD = 0.33
@@ -26,71 +27,74 @@ boardState =[
 print(boardState)
 guiCombined.displayGame(boardState, 0, True, randomLevel.allStates)
 
-#print("pleaseeeeeeeeeeeeeeeeeeeeeeeeee")
-
 game = BoardProcessor(boardState, randomLevel.allStates)
 breadboard = Arduino('COM3')
-
 iterator = util.Iterator(breadboard)
 iterator.start()
-
 input0 = breadboard.get_pin('a:0:i')
 input1 = breadboard.get_pin('a:1:i')
-input2 = breadboard.get_pin('a:2:i')
-input3 = breadboard.get_pin('a:3:i')
+
+data0 = [0,0,0,0,0,0,0,0]
+data1 = [0,0,0,0,0,0,0,0]
+
+list(itertools.product([0, 1], repeat=3))
 
 while running:
     result = -1
     time.sleep(1)
-    print("here 0")
     for event in pygame.event.get():
         if event.type == pygame.QUIT: 
             running = False
-    
-    print("here 1")
 
     if game.csubState == 3:
         print("u win :)")
         break
     
-    print ("here 2")
-    i0 = input0.read()
-    i1 = input1.read()
-    i2 = input2.read()
-    i3 = input3.read()
-    print("here3")
+    print("data 0", data0)
+    print("data 1", data1)
+
+    time.sleep(.4)
+    for i, el in enumerate(list(itertools.product([0, 1], repeat=3))): #list of all combinations of 3 bits
+        #print(el)
+        breadboard.digital[5].write(el[2])
+        breadboard.digital[6].write(el[1])
+        breadboard.digital[7].write(el[0]) 
+
+        breadboard.digital[10].write(el[2])
+        breadboard.digital[11].write(el[1])
+        breadboard.digital[12].write(el[0]) 
+        time.sleep(0.2)
+        data1[i] = input1.read()
+        data0[i] = input0.read()
 
     if (result == 2) :
         guiCombined.displayGame(game.boardState.state, 8)
         print(result)
         continue
+    
+    formattedMap = sensorProcessing.getSensorMap(data0, data1)
+    result = game.update(formattedMap)
+    print("sub")
+    print(game.csubState)
+    print("result")
+    print(result)
 
-    if (i0 and i1 and i2 and i3):
-        print(i0, i1, i2, i3)
-        
-        formattedMap = sensorProcessing.getSensorMap(i0, i1, i2, i3)
-        result = game.update(formattedMap)
-        print("sub")
-        print(game.csubState)
-        print("result")
-        print(result)
-
-        if result == 2:
-            guiCombined.displayGame(game.boardState.state, 8)
-            time.sleep(5)
-            pygame.quit()
-            break
-        if result == 1:
-            print("here")
-            #guiCombined.displayGame(game.boardState.getState(), 1)
-            guiCombined.displayGame(game.boardState.state, 8)
-        elif result == -1:
-            print("error :( user is dumb")
-            guiCombined.displayGame(game.boardState.state, 8, False)
+    if result == 2:
+        guiCombined.displayGame(game.boardState.state, 8)
+        time.sleep(5)
+        pygame.quit()
+        break
+    if result == 1:
+        print("here")
+        #guiCombined.displayGame(game.boardState.getState(), 1)
+        guiCombined.displayGame(game.boardState.state, 8)
+    elif result == -1:
+        print("error :( user is dumb")
+        guiCombined.displayGame(game.boardState.state, 8, False)
 
 
-        elif result == 0:
-            print("pass")
-            pass
+    elif result == 0:
+        print("pass")
+        pass
 
     

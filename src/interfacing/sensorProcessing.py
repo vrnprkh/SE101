@@ -1,12 +1,12 @@
 UPPER_LIM = 0.7
 LOWER_LIM = 0.4
 
-def getSensorMap(i1, i2, i3, i4):
+def getSensorMap(i0, i1):
     boardState = [
-        [i1, i2, 0, 0],
-        [i3, i4, 0, 0],
-        [0, 0, 0, 0],
-        [0, 0, 0, 0]
+        [i0[0], i0[1], i0[2], i0[3]],
+        [i0[4], i0[5], i0[6], i0[7]],
+        [i1[0], i1[1], i1[2], i1[3]],
+        [i1[4], i1[5], i1[6], i1[7]]
         #hardcoded for now, fix later
     ]
 
