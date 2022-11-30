@@ -129,6 +129,8 @@ def colourSquares(pieceCoord, gameState, x, y, screen):
         possibleMoves = King.kingLegal(row, col, gameState)
 
     # Highlights the possible squares the player can move their piece to
+    print("Legal Moves List from GuiCombined:")
+    print(possibleMoves)
     for element in possibleMoves:
         row = element[0]
         col = element[1]
