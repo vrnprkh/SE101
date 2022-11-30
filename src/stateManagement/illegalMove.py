@@ -19,31 +19,30 @@ class LegalMoveProcessor:
         return False
 
     @staticmethod
-    def isLegal(boardProcessor, move, piece: str):
+    def isLegal(boardProcessor, move, piece):
         #print("hello i am runnigh :)))))))))))))))))))")
         if not boardProcessor.tutorial == None:
             return LegalMoveProcessor.isLegalTutorialMove(move)
-        return (move[1] in Queen.queenLegal(move[0][0], move[0][1], boardProcessor.boardState.formatBoardState()))
 
-        # if piece == "pawn":
-        #     return Pawn.pawnLegal(move[0], move[1], boardProcessor.boardState.formatBoardState())
+        if piece == 7 or piece == 1:
+            return (move[1] in Pawn.pawnLegal(move[0], move[1], boardProcessor.boardState.formatBoardState()))
 
-        # if piece == "knight":
-        #     return Knight.knightLegal(move[0], move[1], boardProcessor.boardState)
+        if piece == 9 or piece == 3:
+            return (move[1] in Knight.knightLegal(move[0], move[1], boardProcessor.boardState.formatBoardState()))
 
-        # if piece == "bishop":
-        #     return Bishop.bishopLegal(move[0], move[1], boardProcessor.boardState.formatBoardState())
+        if piece == 4 or piece == 10:
+            return (move[1] in Bishop.bishopLegal(move[0], move[1], boardProcessor.boardState.formatBoardState()))
 
-        # if piece == "rook":
-        #     return Rook.rookLegal(move[0], move[1], boardProcessor.boardState.formatBoardState())
+        if piece == 2 or piece == 8:
+            return (move[1] in Rook.rookLegal(move[0], move[1], boardProcessor.boardState.formatBoardState()))
         
-        # if piece == "queen":
-        #     return Queen.queenLegal(move[0], move[1], boardProcessor.boardState.formatBoardState())
+        if piece == 5 or piece == 11:
+            return (move[1] in Queen.queenLegal(move[0], move[1], boardProcessor.boardState.formatBoardState()))
 
-        # if piece == "king":
-        #     return King.kingLegal(move[0], move[1], boardProcessor.boardState.formatBoardState())
+        if piece == 6 or piece == 12:
+            return (move[1] in King.kingLegal(move[0], move[1], boardProcessor.boardState.formatBoardState()))
 
-        # return False
+        return False
 
 
 #Class that will generate a list of legal moves

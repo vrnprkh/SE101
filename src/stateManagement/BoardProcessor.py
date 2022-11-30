@@ -88,7 +88,7 @@ class BoardProcessor:
 
                 #print(self.tutorial.subStates[self.csubState])
                 
-                legal = illegalMove.LegalMoveProcessor.isLegal(self, move, "") #self.boardState.state[self.firstCoord[0]][self.firstCoord[1]]) #XXX
+                legal = illegalMove.LegalMoveProcessor.isLegal(self, move, self.boardState.state[self.firstCoord[0]][self.firstCoord[1]]) #XXX
                 print(legal)
                 if legal:
                     #self.tutorial.makeMove(move)
