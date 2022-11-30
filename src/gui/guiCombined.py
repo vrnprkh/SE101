@@ -91,11 +91,12 @@ def displayGame (gameState, pieceCoord, condition = True, substate = [], highlig
     #     pygame.draw.rect(screen, (80, 155, 103), pygame.Rect(x+(160*row), y+(160*col), 160, 160))
 
     # # Displays the mini tutorial on the side
-    if piece > 6: tutorialNum = piece - 6
-    elif piece > 0: tutorialNum = piece
+    if (piece > 6): tutorialNum = piece - 6
+    elif (piece > 0): tutorialNum = piece
     
-    tutorialImg = pygame.image.load(chessPieces[tutorialImages[tutorialNum] - 1]).convert_alpha()
-    screen.blit(tutorialImg, (775, 500)) #edit: prob need to change the coords 
+    if (piece != 0):
+        tutorialImg = pygame.image.load(chessPieces[tutorialImages[tutorialNum] - 1]).convert_alpha()
+        screen.blit(tutorialImg, (775, 500)) #edit: prob need to change the coords 
     
     # Draws the chess pieces onto the board
     for i in range(len(gameState)):
