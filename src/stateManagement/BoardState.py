@@ -20,7 +20,9 @@ class BoardState:
         
         for i, row in enumerate(copy_state):
             for j, col in enumerate(row):
-                if col not in [7, 8, 9, 10, 11, 12]:
+                if col not in [0, 7, 8, 9, 10, 11, 12]:
+                    copy_state[i][j] = Constants.enemy
+                elif col not in [0, 1, 2, 3, 4, 5, 6]:
                     copy_state[i][j] = Constants.enemy
 
         return copy_state
