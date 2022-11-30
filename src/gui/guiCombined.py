@@ -38,7 +38,8 @@ def displayGame (gameState, pieceCoord, condition = True, substate = [], highlig
 
     screen = pygame.display.set_mode([1100, 800])
     pygame.display.set_caption('NandanLabs')
-    piece = gameState[pieceCoord[0]] [pieceCoord[1]]
+    if (pieceCoord == None): piece = 0
+    else: piece = gameState[pieceCoord[0]] [pieceCoord[1]]
     # chessPieces = [images_path+"Pawn.png", images_path+"Rook.png", images_path+"Knight.png", images_path+"Bishop.png", images_path+"Queen.png", images_path+"King.png", images_path+"PawnW.png", path+"RookW.png", path+"KnightW.png", path+"BishopW.png", path+"QueenW.png", +"KingW.png"]
     pieceStr = ["txtPawn.png", "txtRook.png", "txtKnight.png", "txtBishop.png", "txtQueen.png", "txtKing.png", "txtPawn.png", "txtRook.png", "txtKnight.png", "txtBishop.png", "txtQueen.png", "txtKing.png"]
     coords = [[[80, 80], [240, 80], [400, 80], [560, 80]],
