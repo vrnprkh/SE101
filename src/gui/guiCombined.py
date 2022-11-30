@@ -22,7 +22,7 @@ chessPieces = []
 tutorialImages = []
 for (dirpath, dirnames, filenames) in os.walk(images_path):
     for file in filenames:
-        if 'txt' not in file and 'chosen' not in file and 'Move' not in file and 'Tutorial' not in file:
+        if 'txt' not in file and 'chosen' not in file and 'Move' not in file and 'Tutorial' not in file and 'Square' not in file:
             chessPieces.append(os.path.join(images_path, file))
         if 'Tutorial' in file:
             tutorialImages.append(os.path.join(images_path, file))
@@ -132,4 +132,5 @@ def colourSquares(pieceCoord, gameState, x, y, screen):
     for element in possibleMoves:
         row = element [0]
         col = element [1]
-        pygame.draw.rect(screen, (154,205,50), pygame.Rect(x+(160*col), y+(160*row), 160, 160))
+        square = pygame.image.load(os.path.join(os.path.dirname(__file__), "graphics", "validSquare.png")).convert_alpha()
+        screen.blit(square, (x+(160*col), y+(160*row)))
