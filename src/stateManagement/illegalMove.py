@@ -28,7 +28,7 @@ class LegalMoveProcessor:
             return (move[1] in Pawn.pawnLegal(move[0], move[1], boardProcessor.boardState.formatBoardState()))
 
         if piece == 9 or piece == 3:
-            return (move[1] in Knight.knightLegal(move[0], move[1], boardProcessor.boardState.formatBoardState))
+            return (move[1] in Knight.knightLegal(move[0], move[1], boardProcessor.boardState.formatBoardState()))
 
         if piece == 4 or piece == 10:
             return (move[1] in Bishop.bishopLegal(move[0], move[1], boardProcessor.boardState.formatBoardState()))
