@@ -26,9 +26,7 @@ for file in chessPieces:
 
         
 chessPieces.sort(key=lambda f: int(''.join(filter(str.isdigit, f))))
-# print(chessPieces)
 tutorialImages.sort(key=lambda f: int(''.join(filter(str.isdigit, f))))
-
 
 # returns the condition that determines whether the user's move is valid or invalid
 def isValid(condtion = True):
@@ -42,7 +40,6 @@ def displayGame (gameState, pieceCoord, condition = True, substate = [], highlig
     if (pieceCoord is None): piece = 0
     else: piece = gameState[pieceCoord[0]] [pieceCoord[1]]
 
-    # chessPieces = [images_path+"Pawn.png", images_path+"Rook.png", images_path+"Knight.png", images_path+"Bishop.png", images_path+"Queen.png", images_path+"King.png", images_path+"PawnW.png", path+"RookW.png", path+"KnightW.png", path+"BishopW.png", path+"QueenW.png", +"KingW.png"]
     pieceStr = ["txtPawn.png", "txtRook.png", "txtKnight.png", "txtBishop.png", "txtQueen.png", "txtKing.png", "txtPawn.png", "txtRook.png", "txtKnight.png", "txtBishop.png", "txtQueen.png", "txtKing.png"]
     coords = [[[80, 80], [240, 80], [400, 80], [560, 80]],
             [[80, 240], [240, 240], [400, 240], [560, 240]],
@@ -82,15 +79,7 @@ def displayGame (gameState, pieceCoord, condition = True, substate = [], highlig
             else: colour = gray
             pygame.draw.rect(screen, colour, pygame.Rect(x+(160*j), y+(160*i), 160, 160))
 
-    
-    # Highlights the possible squares the player can move their piece to
-    # moves = substate[1]
-    # for element in moves [0]:
-    #     row = element [1][0]
-    #     col = element [1][1]
-    #     pygame.draw.rect(screen, (80, 155, 103), pygame.Rect(x+(160*row), y+(160*col), 160, 160))
-
-    # # Displays the mini tutorial on the side
+    # Displays the mini tutorial on the side
     if (piece > 6): tutorialNum = piece - 6
     elif (piece > 0): tutorialNum = piece
     
@@ -107,5 +96,7 @@ def displayGame (gameState, pieceCoord, condition = True, substate = [], highlig
 
     
     pygame.display.flip()
+
+
 
 
