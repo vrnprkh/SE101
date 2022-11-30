@@ -19,6 +19,7 @@ running = True
 randomLevel = random.choice([rookLevel, bishopLevel, queenLevel])
 
 
+
 # boardState =[
 #         [randomLevel.allStates[0][0][0][0], randomLevel.allStates[0][0][0][1],0,0],
 #         [randomLevel.allStates[0][0][1][0], randomLevel.allStates[0][0][1][1],0,0],

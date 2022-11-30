@@ -18,9 +18,9 @@ class BoardState:
         copy_state = [ [i for i in row] for row in self.state ]
         print(copy_state)
         
-        for row in copy_state:
-            for col in row:
+        for i, row in enumerate(copy_state):
+            for j, col in enumerate(row):
                 if col not in [7, 8, 9, 10, 11, 12]:
-                    copy_state[row][col] = Constants.enemy
+                    copy_state[i][j] = Constants.enemy
 
         return copy_state
