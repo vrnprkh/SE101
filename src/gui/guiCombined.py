@@ -88,14 +88,15 @@ def displayGame (gameState, pieceCoord, condition = True, substate = [], highlig
             else: colour = gray
             pygame.draw.rect(screen, colour, pygame.Rect(x+(160*j), y+(160*i), 160, 160))
 
-    colourSquares(pieceCoord, gameState, x, y, screen)
+    if pieceCoord is not None:
+        colourSquares(pieceCoord, gameState, x, y, screen)
 
     # Displays the mini tutorial on the side
     if piece > 6: tutorialNum = piece - 6
     elif(piece > 0): tutorialNum = piece
     
     if (piece != 0):
-        tutorialImg = pygame.image.load(chessPieces[tutorialImages[tutorialNum] - 1]).convert_alpha()
+        tutorialImg = pygame.image.load(tutorialImages[tutorialNum -1]).convert_alpha()
         screen.blit(tutorialImg, (775, 500)) #edit: prob need to change the coords 
     
     # Draws the chess pieces onto the board
@@ -129,6 +130,6 @@ def colourSquares(pieceCoord, gameState, x, y, screen):
 
     # Highlights the possible squares the player can move their piece to
     for element in possibleMoves:
-        row = element [1][0]
-        col = element [1][1]
-        pygame.draw.rect(screen, (80, 155, 103), pygame.Rect(x+(160*row), y+(160*col), 160, 160))
+        row = element [0]
+        col = element [1]
+        pygame.draw.rect(screen, (154, 205, 50), pygame.Rect(x+(160*row), y+(160*col), 160, 160), 0, 0.5)

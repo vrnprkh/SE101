@@ -28,14 +28,14 @@ randomLevel = random.choice([rookLevel, bishopLevel, queenLevel])
 #     ]
 
 boardState = [
-    [1,0,0,0],
+    [11,0,0,0],
     [0,0,0,0],
     [0,0,0,0],
     [0,0,0,0]
 
 ]
 print(boardState)
-guiCombined.displayGame(boardState, 0)
+guiCombined.displayGame(boardState, None)
 
 #print("pleaseeeeeeeeeeeeeeeeeeeeeeeeee")
 
