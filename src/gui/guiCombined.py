@@ -1,15 +1,14 @@
 import pygame
 import os
-import importlib, sys
-
+import __init__
 # from ..stateManagement.PieceLegalMoves import Pawn, Bishop, Knight, Rook, Queen, King
-PieceLegalMoves = importlib.import_module( os.path.join( os.path.dirname(__file__), "..", "stateManagement", "PieceLegalMoves") )
-Pawn = PieceLegalMoves.Pawn
-Bishop = PieceLegalMoves.Bishop
-Knight = PieceLegalMoves.Knight
-Rook = PieceLegalMoves.Rook
-Queen = PieceLegalMoves.Queen
-King = PieceLegalMoves.King
+# Pawn = importlib.import_module( os.path.abspath(os.path.join( os.path.dirname(__file__), "..", "stateManagement", "PieceLegalMoves", "Pawn.py")) )
+# Bishop = importlib.import_module( os.path.abspath(os.path.join( os.path.dirname(__file__), "..", "stateManagement", "PieceLegalMoves", "Bishop.py")) )
+# Knight = importlib.import_module( os.path.abspath(os.path.join( os.path.dirname(__file__), "..", "stateManagement", "PieceLegalMoves", "Knight.py")) )
+# Rook = importlib.import_module( os.path.abspath(os.path.join( os.path.dirname(__file__), "..", "stateManagement", "PieceLegalMoves", "Rook.py")) )
+# Queen = importlib.import_module( os.path.abspath(os.path.join( os.path.dirname(__file__), "..", "stateManagement", "PieceLegalMoves", "Quuen.py")) )
+# King = importlib.import_module( os.path.abspath(os.path.join( os.path.dirname(__file__), "..", "stateManagement", "PieceLegalMoves", "King.py")) )
+
 
 pygame.init() 
 base_path = os.path.dirname(__file__)
@@ -115,17 +114,17 @@ def colourSquares(pieceCoord, gameState, x, y, screen):
 
     possibleMoves = None
     if piece == 1 or piece == 7:
-        possibleMoves = Pawn.pawnLegal(row, col, gameState)
+        possibleMoves = __init__.Pawn.pawnLegal(row, col, gameState)
     if piece == 2 or piece == 8:
-        possibleMoves = Rook.rookLegal(row, col, gameState)
+        possibleMoves = __init__.Rook.rookLegal(row, col, gameState)
     if piece == 3 or piece == 9:
-        possibleMoves = Knight.knightLegal(row, col, gameState)
+        possibleMoves = __init__.Knight.knightLegal(row, col, gameState)
     if piece == 4 or piece == 10:
-        possibleMoves = Bishop.bishopLegal(row, col, gameState)
+        possibleMoves = __init__.Bishop.bishopLegal(row, col, gameState)
     if piece == 5 or piece == 11:
-        possibleMoves = Queen.queenLegal(row, col, gameState)
+        possibleMoves = __init__.Queen.queenLegal(row, col, gameState)
     if piece == 6 or piece == 12:
-        possibleMoves = King.kingLegal(row, col, gameState)
+        possibleMoves = __init__.King.kingLegal(row, col, gameState)
 
     # Highlights the possible squares the player can move their piece to
     for element in possibleMoves:
