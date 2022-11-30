@@ -1,6 +1,8 @@
 import pygame
 import os
 
+from ..stateManagement.PieceLegalMoves import Pawn, Bishop, Knight, Rook, Queen, King
+
 pygame.init() 
 base_path = os.path.dirname(__file__)
 images_path = os.path.join(base_path, "graphics")
@@ -33,7 +35,6 @@ def isValid(condtion = True):
     return condtion
 
 def displayGame (gameState, pieceCoord, condition = True, substate = [], highlighted = []):
-
     screen = pygame.display.set_mode([1100, 800])
     pygame.display.set_caption('NandanLabs')
 
@@ -79,9 +80,17 @@ def displayGame (gameState, pieceCoord, condition = True, substate = [], highlig
             else: colour = gray
             pygame.draw.rect(screen, colour, pygame.Rect(x+(160*j), y+(160*i), 160, 160))
 
-    # Displays the mini tutorial on the side
-    if (piece > 6): tutorialNum = piece - 6
-    elif (piece > 0): tutorialNum = piece
+    
+    # Highlights the possible squares the player can move their piece to
+    # moves = substate[1]
+    # for element in moves [0]:
+    #     row = element [1][0]
+    #     col = element [1][1]
+    #     pygame.draw.rect(screen, (80, 155, 103), pygame.Rect(x+(160*row), y+(160*col), 160, 160))
+
+    # # Displays the mini tutorial on the side
+    # if piece > 6: tutorialNum = piece - 6
+    # else: tutorialNum = piece
     
     if (piece != 0):
         tutorialImg = pygame.image.load(chessPieces[tutorialImages[tutorialNum] - 1]).convert_alpha()
@@ -98,5 +107,25 @@ def displayGame (gameState, pieceCoord, condition = True, substate = [], highlig
     pygame.display.flip()
 
 
+def colourSquares(pieceCoord, gameState, x, y, screen):
+    row, col = pieceCoord
+    piece = gameState[row][col]
 
+    possibleMoves = None
+    if piece == 1 or piece == 7:
+        possibleMoves = Pawn.pawnLegal(row, col, gameState)
+    if piece == 2 or piece == 8:
+        possibleMoves = Rook.rookLegal(row, col, gameState)
+    if piece == 3 or piece == 9:
+        possibleMoves = Bishop.bishopLegal(row, col, gameState)
+    if piece == 4 or piece == 10:
+        possibleMoves = Rook.rookLegal(row, col, gameState)
+    if piece == 5 or piece == 11:
+        possibleMoves = Queen.queenLegal(row, col, gameState)
+    if piece == 6 or piece == 12:
+        possibleMoves = King.kingLegal(row, col, gameState)
 
+    for element in possibleMoves:
+        row = element [1][0]
+        col = element [1][1]
+        pygame.draw.rect(screen, (80, 155, 103), pygame.Rect(x+(160*row), y+(160*col), 160, 160))
