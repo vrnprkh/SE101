@@ -132,6 +132,6 @@ def colourSquares(pieceCoord, gameState, x, y, screen):
     print("Legal Moves List from GuiCombined:")
     print(possibleMoves)
     for element in possibleMoves:
-        row = element [1][0]
-        col = element [1][1]
+        row = element [0]
+        col = element [1]
         pygame.draw.rect(screen, (154,205,50), pygame.Rect(x+(160*row), y+(160*col), 160, 160), 0, 0.5)
