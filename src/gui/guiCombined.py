@@ -1,6 +1,5 @@
 import pygame
 import os
-import __init__
 from .PieceLegalMoves import Pawn, Rook, Bishop, Knight, Queen, King
 
 # from ..stateManagement.PieceLegalMoves import Pawn, Bishop, Knight, Rook, Queen, King
