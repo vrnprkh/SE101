@@ -73,7 +73,7 @@ class BoardProcessor:
         # place first piece
         if (type(self.firstCoord) is tuple) and (self.secondCoord == None) and (newSensorValue == 1):
             # if same square
-            print("bawls")
+            # print("bawls")
             if self.firstCoord == newCoord:
                 self.firstCoord = None
                 #print("same square put")
