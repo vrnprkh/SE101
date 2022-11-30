@@ -20,8 +20,8 @@ def getSensorMap(i0, i1):
     ]
 
     '''
-    for i in range(2):
-        for j in range(2):
+    for i in range(4):
+        for j in range(4):
             boardState[i][j] = processInput(boardState[i][j])
     
     return boardState

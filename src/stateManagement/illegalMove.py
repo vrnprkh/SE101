@@ -22,27 +22,28 @@ class LegalMoveProcessor:
     def isLegal(boardProcessor, move, piece: str):
         #print("hello i am runnigh :)))))))))))))))))))")
         if not boardProcessor.tutorial == None:
-            return LegalMoveProcessor.isLegalTutorialMove(move);
+            return LegalMoveProcessor.isLegalTutorialMove(move)
+        return (move[1] in Queen.queenLegal(move[0][0], move[0][1], boardProcessor.boardState.formatBoardState()))
 
-        if piece == "pawn":
-            return Pawn.pawnLegal(move[0], move[1], boardProcessor.boardState.formatBoardState())
+        # if piece == "pawn":
+        #     return Pawn.pawnLegal(move[0], move[1], boardProcessor.boardState.formatBoardState())
 
-        if piece == "knight":
-            return Knight.knightLegal(move[0], move[1], boardProcessor.boardState)
+        # if piece == "knight":
+        #     return Knight.knightLegal(move[0], move[1], boardProcessor.boardState)
 
-        if piece == "bishop":
-            return Bishop.bishopLegal(move[0], move[1], boardProcessor.boardState.formatBoardState())
+        # if piece == "bishop":
+        #     return Bishop.bishopLegal(move[0], move[1], boardProcessor.boardState.formatBoardState())
 
-        if piece == "rook":
-            return Rook.rookLegal(move[0], move[1], boardProcessor.boardState.formatBoardState())
+        # if piece == "rook":
+        #     return Rook.rookLegal(move[0], move[1], boardProcessor.boardState.formatBoardState())
         
-        if piece == "queen":
-            return Queen.queenLegal(move[0], move[1], boardProcessor.boardState.formatBoardState())
+        # if piece == "queen":
+        #     return Queen.queenLegal(move[0], move[1], boardProcessor.boardState.formatBoardState())
 
-        if piece == "king":
-            return King.kingLegal(move[0], move[1], boardProcessor.boardState.formatBoardState())
+        # if piece == "king":
+        #     return King.kingLegal(move[0], move[1], boardProcessor.boardState.formatBoardState())
 
-        return False
+        # return False
 
 
 #Class that will generate a list of legal moves

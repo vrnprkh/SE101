@@ -15,7 +15,7 @@ for (dirpath, dirnames, filenames) in os.walk(images_path):
         if 'txt' not in file and 'chosen' not in file and 'Move' not in file and 'Tutorial' not in file:
             chessPieces.append(os.path.join(images_path, file))
         if 'Tutorial' in file:
-            chessPieces.append(os.path.join(images_path, file))
+            tutorialImages.append(os.path.join(images_path, file))
 
     break
 
@@ -87,11 +87,11 @@ def displayGame (gameState, piece = 0, condition = True, substate = [], highligh
     #     pygame.draw.rect(screen, (80, 155, 103), pygame.Rect(x+(160*row), y+(160*col), 160, 160))
 
     # # Displays the mini tutorial on the side
-    # if piece > 6: tutorialNum = piece - 6
-    # else: tutorialNum = piece
+    if piece > 6: tutorialNum = piece - 6
+    else: tutorialNum = piece
     
-    # tutorialImg = pygame.image.load(chessPieces[tutorialImages[tutorialNum] - 1]).convert_alpha()
-    # screen.blit(tutorialImg, (775, 700)) #edit: prob need to change the coords 
+    tutorialImg = pygame.image.load(tutorialImages[tutorialNum-1]).convert_alpha()
+    screen.blit(tutorialImg, (775, 700)) #edit: prob need to change the coords 
     
     # Draws the chess pieces onto the board
     for i in range(len(gameState)):

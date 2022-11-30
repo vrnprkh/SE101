@@ -18,18 +18,28 @@ running = True
 
 randomLevel = random.choice([rookLevel, bishopLevel, queenLevel])
 
-boardState =[
-        [randomLevel.allStates[0][0][0][0], randomLevel.allStates[0][0][0][1],0,0],
-        [randomLevel.allStates[0][0][1][0], randomLevel.allStates[0][0][1][1],0,0],
-        [0,0,0,0],
-        [0,0,0,0]
-    ]
+
+# boardState =[
+#         [randomLevel.allStates[0][0][0][0], randomLevel.allStates[0][0][0][1],0,0],
+#         [randomLevel.allStates[0][0][1][0], randomLevel.allStates[0][0][1][1],0,0],
+#         [0,0,0,0],
+#         [0,0,0,0]
+#     ]
+
+boardState = [
+    [1,0,0,0],
+    [0,0,0,0],
+    [0,0,0,0],
+    [0,0,0,0]
+
+]
 print(boardState)
-guiCombined.displayGame(boardState, 0, True, randomLevel.allStates)
+guiCombined.displayGame(boardState, 0)
 
 #print("pleaseeeeeeeeeeeeeeeeeeeeeeeeee")
 
-game = BoardProcessor.BoardProcessor(boardState, randomLevel.allStates)
+#game = BoardProcessor.BoardProcessor(boardState, randomLevel.allStates)
+game = BoardProcessor.BoardProcessor(boardState)
 breadboard = Arduino('COM3')
 iterator = util.Iterator(breadboard)
 iterator.start()
@@ -43,10 +53,10 @@ list(itertools.product([0, 1], repeat=3))
 
 while running:
     result = -1
-    time.sleep(1)
     for event in pygame.event.get():
         if event.type == pygame.QUIT: 
             running = False
+
 
     if game.csubState == 3:
         print("u win :)")
@@ -55,7 +65,7 @@ while running:
     print("data 0", data0)
     print("data 1", data1)
 
-    time.sleep(.4)
+    time.sleep(.1)
     for i, el in enumerate(list(itertools.product([0, 1], repeat=3))): #list of all combinations of 3 bits
         #print(el)
         breadboard.digital[5].write(el[2])
@@ -65,7 +75,7 @@ while running:
         breadboard.digital[10].write(el[2])
         breadboard.digital[11].write(el[1])
         breadboard.digital[12].write(el[0]) 
-        time.sleep(0.2)
+        time.sleep(0.1)
         data1[i] = input1.read()
         data0[i] = input0.read()
 

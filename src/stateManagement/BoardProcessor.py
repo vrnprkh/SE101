@@ -2,9 +2,9 @@ from . import BoardState, TutorialLevel
 from . import illegalMove
 
 class BoardProcessor:
-    def __init__(self, state, tutorialData):
+    def __init__(self, state, tutorialData = None):
         self.boardState = BoardState.BoardState(state)
-        self.tutorial = TutorialLevel.TutorialLevel(tutorialData)
+        self.tutorial = TutorialLevel.TutorialLevel(tutorialData) if not tutorialData == None else None
         self.sensorMap = None
         
         self.firstCoord = None
@@ -86,9 +86,9 @@ class BoardProcessor:
                 # print("move")
                 print(move)
 
-                print(self.tutorial.subStates[self.csubState])
+                #print(self.tutorial.subStates[self.csubState])
                 
-                legal = illegalMove.LegalMoveProcessor.isLegal(self, move)
+                legal = illegalMove.LegalMoveProcessor.isLegal(self, move, "")
                 print(legal)
                 if legal:
                     #self.tutorial.makeMove(move)
