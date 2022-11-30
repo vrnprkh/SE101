@@ -28,7 +28,7 @@ randomLevel = random.choice([rookLevel, bishopLevel, queenLevel])
 #     ]
 
 boardState = [
-    [11,0,0,0],
+    [7,0,0,0],
     [0,0,0,0],
     [0,0,0,0],
     [0,0,0,0]
