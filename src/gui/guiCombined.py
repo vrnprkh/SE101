@@ -3,7 +3,7 @@ import os
 import importlib, sys
 
 # from ..stateManagement.PieceLegalMoves import Pawn, Bishop, Knight, Rook, Queen, King
-PieceLegalMoves = importlib.import_module(os.path.join( os.path.dirname(__file__) ), "..", "stateManagement", "PieceLegalMoves")
+PieceLegalMoves = importlib.import_module( os.path.join( os.path.dirname(__file__), "..", "stateManagement", "PieceLegalMoves") )
 Pawn = PieceLegalMoves.Pawn
 Bishop = PieceLegalMoves.Bishop
 Knight = PieceLegalMoves.Knight
