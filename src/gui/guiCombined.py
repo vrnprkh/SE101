@@ -96,7 +96,7 @@ def displayGame (gameState, pieceCoord, condition = True, substate = [], highlig
     elif(piece > 0): tutorialNum = piece
     
     if (piece != 0):
-        tutorialImg = pygame.image.load(tutorialImages[tutorialNum -1]).convert_alpha()
+        tutorialImg = pygame.image.load(tutorialImages[tutorialNum-1]).convert_alpha()
         screen.blit(tutorialImg, (775, 500)) #edit: prob need to change the coords 
     
     # Draws the chess pieces onto the board
@@ -117,19 +117,21 @@ def colourSquares(pieceCoord, gameState, x, y, screen):
     possibleMoves = None
     if piece == 1 or piece == 7:
         possibleMoves = Pawn.pawnLegal(row, col, gameState)
-    if piece == 2 or piece == 8:
+    elif piece == 2 or piece == 8:
         possibleMoves = Rook.rookLegal(row, col, gameState)
-    if piece == 3 or piece == 9:
+    elif piece == 3 or piece == 9:
         possibleMoves = Knight.knightLegal(row, col, gameState)
-    if piece == 4 or piece == 10:
+    elif piece == 4 or piece == 10:
         possibleMoves = Bishop.bishopLegal(row, col, gameState)
-    if piece == 5 or piece == 11:
+    elif piece == 5 or piece == 11:
         possibleMoves = Queen.queenLegal(row, col, gameState)
-    if piece == 6 or piece == 12:
+    elif piece == 6 or piece == 12:
         possibleMoves = King.kingLegal(row, col, gameState)
 
     # Highlights the possible squares the player can move their piece to
+    print("Legal Moves List from GuiCombined:")
+    print(possibleMoves)
     for element in possibleMoves:
-        row = element [0]
-        col = element [1]
-        pygame.draw.rect(screen, (154, 205, 50), pygame.Rect(x+(160*row), y+(160*col), 160, 160), 0, 0.5)
+        row = element [1][0]
+        col = element [1][1]
+        pygame.draw.rect(screen, (154,205,50), pygame.Rect(x+(160*row), y+(160*col), 160, 160), 0, 0.5)
