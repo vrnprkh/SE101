@@ -5,29 +5,45 @@ def rookLegal(row, col, boardState):
     r = row
     while r < Constants.MAX:
         r += 1
-        if boardState[r][col] != 0 and boardState[r][col] != Constants.enemy:
+        if boardState[r][col] == Constants.enemy:
+            moves.append((r, col))
             break
+        if boardState[r][col] != 0:
+            break
+
         moves.append((r, col))
     
     r = row
     while r > Constants.MIN:
         r -= 1
-        if boardState[r][col] != 0 and boardState[r][col] != Constants.enemy:
+        if boardState[r][col] == Constants.enemy:
+            moves.append((r, col))
             break
+        if boardState[r][col] != 0:
+            break
+
         moves.append((r, col))
     
     c = col
     while c < Constants.MAX:
         c += 1
-        if boardState[row][c] != 0 and boardState[row][c] != Constants.enemy:
+        if boardState[r][col] == Constants.enemy:
+            moves.append((r, col))
             break
-        moves.append((row, c))
+        if boardState[r][col] != 0:
+            break
+
+        moves.append((r, col))
     
     c = col
     while c > Constants.MIN:
         c -= 1
-        if boardState[row][c] != 0 and boardState[row][c] != Constants.enemy:
+        if boardState[r][col] == Constants.enemy:
+            moves.append((r, col))
             break
-        moves.append((row, c))
+        if boardState[r][col] != 0:
+            break
+
+        moves.append((r, col))
     
     return moves
