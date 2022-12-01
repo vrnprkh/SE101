@@ -1,6 +1,7 @@
 import pygame
 import os
-from .PieceLegalMoves import Pawn, Rook, Bishop, Knight, Queen, King
+from .PieceLegalMoves import Pawn, Rook, Bishop, Knight, Queen, King, Constants
+from .formatState import formatState
 
 # from ..stateManagement.PieceLegalMoves import Pawn, Bishop, Knight, Rook, Queen, King
 # Pawn = importlib.import_module( os.path.abspath(os.path.join( os.path.dirname(__file__), "..", "stateManagement", "PieceLegalMoves", "Pawn.py")) )
@@ -89,7 +90,7 @@ def displayGame (gameState, pieceCoord, condition = True, substate = [], highlig
             pygame.draw.rect(screen, colour, pygame.Rect(x+(160*j), y+(160*i), 160, 160))
 
     if pieceCoord is not None:
-        colourSquares(pieceCoord, gameState, x, y, screen)
+        colourSquares(pieceCoord, formatState(gameState, piece), x, y, screen)
 
     # Displays the mini tutorial on the side
     if piece > 6: tutorialNum = piece - 6
@@ -129,8 +130,14 @@ def colourSquares(pieceCoord, gameState, x, y, screen):
         possibleMoves = King.kingLegal(row, col, gameState)
 
     # Highlights the possible squares the player can move their piece to
+    if possibleMoves == None:
+        return
+        
     for element in possibleMoves:
         row = element [0]
         col = element [1]
-        square = pygame.image.load(os.path.join(os.path.dirname(__file__), "graphics", "validSquare.png")).convert_alpha()
-        screen.blit(square, (x+(160*col), y+(160*row)))
+        if gameState[row][col] == Constants.enemy:
+            pygame.draw.rect(screen, (25, 150, 25), pygame.Rect(x+(160*col), y+(160*row), 160, 160))
+        else:
+            square = pygame.image.load(os.path.join(os.path.dirname(__file__), "graphics", "validSquare.png")).convert_alpha()
+            screen.blit(square, (x+(160*col), y+(160*row)))

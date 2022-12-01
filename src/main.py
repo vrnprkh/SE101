@@ -28,10 +28,10 @@ randomLevel = random.choice([rookLevel, bishopLevel, queenLevel])
 #     ]
 
 boardState = [
-    [0,0,0,1],
-    [0,2,0,0],
+    [0,1,0,0],
+    [0,0,11,0],
     [0,0,0,0],
-    [0,0,9,0]
+    [0,0,0,0]
 
 ]
 print(boardState)
@@ -41,7 +41,7 @@ guiCombined.displayGame(boardState, None)
 
 #game = BoardProcessor.BoardProcessor(boardState, randomLevel.allStates)
 game = BoardProcessor.BoardProcessor(boardState)
-breadboard = Arduino('COM5')
+breadboard = Arduino('COM3')
 iterator = util.Iterator(breadboard)
 iterator.start()
 input0 = breadboard.get_pin('a:0:i')
@@ -93,7 +93,7 @@ while running:
     print(result)
 
     if result == 2:
-        
+
         guiCombined.displayGame(game.boardState.state, game.firstCoord)
         time.sleep(5)
         pygame.quit()
