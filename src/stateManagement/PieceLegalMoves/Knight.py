@@ -36,3 +36,5 @@ def knightLegal(row, col, boardState):
     if row - 2 >= Constants.MIN and col - 1 >= Constants.MIN and (boardState[row - 2][col - 1] == 0 or boardState[row - 2][col - 1] == Constants.enemy):
     # if boardState[row - 2][col - 1] == 0 or boardState[row - 2][col - 1] == enemy:
         moves.append((row - 2, col - 1))
+
+    return moves
