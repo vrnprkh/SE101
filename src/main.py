@@ -28,10 +28,10 @@ randomLevel = random.choice([rookLevel, bishopLevel, queenLevel])
 #     ]
 
 boardState = [
-    [0,0,7,0],
     [0,0,0,0],
-    [0,3,0,0],
-    [0,0,0,0]
+    [0,0,0,0],
+    [0,0,9,0],
+    [0,1,0,0]
 
 ]
 print(boardState)
@@ -92,13 +92,13 @@ while running:
     print("result")
     print(result)
 
-    if result == 2:
+    if result == 3:
 
         guiCombined.displayGame(game.boardState.state, game.firstCoord)
         time.sleep(5)
         pygame.quit()
         break
-    if result == 1:
+    if result == 1 or result == 2:
         print("here")
         #guiCombined.displayGame(game.boardState.getState(), 1)
         guiCombined.displayGame(game.boardState.state, game.firstCoord)
