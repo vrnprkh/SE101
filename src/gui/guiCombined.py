@@ -71,12 +71,13 @@ def displayGame (gameState, pieceCoord, condition = True, substate = [], highlig
         pieceTxt = pygame.image.load( os.path.join(images_path, pieceStr[piece-1]) ).convert_alpha()
         screen.blit(pieceTxt, (755, 310))
     
-    if (isValid(condition)):
-        isValidImg = pygame.image.load(os.path.join(os.path.dirname(__file__), "graphics", "validMove.png")).convert_alpha()
-    else:
-        isValidImg = pygame.image.load(os.path.join(os.path.dirname(__file__), "graphics", "invalidMove.png")).convert_alpha()
+    if (pieceCoord is not None):
+        if (isValid(condition)):
+            isValidImg = pygame.image.load(os.path.join(os.path.dirname(__file__), "graphics", "validMove.png")).convert_alpha()
+        else:
+            isValidImg = pygame.image.load(os.path.join(os.path.dirname(__file__), "graphics", "invalidMove.png")).convert_alpha()
     
-    screen.blit(isValidImg, (775, 400))
+        screen.blit(isValidImg, (775, 400))
 
     # Draw the chessboard
     gray = (175, 171, 157)
@@ -98,7 +99,7 @@ def displayGame (gameState, pieceCoord, condition = True, substate = [], highlig
     
     if (piece != 0):
         tutorialImg = pygame.image.load(tutorialImages[tutorialNum-1]).convert_alpha()
-        screen.blit(tutorialImg, (775, 500)) #edit: prob need to change the coords 
+        screen.blit(tutorialImg, (775, 450)) #edit: prob need to change the coords 
     
     # Draws the chess pieces onto the board
     for i in range(len(gameState)):
