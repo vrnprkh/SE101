@@ -67,11 +67,10 @@ def displayGame (gameState, pieceCoord, condition = True, substate = [], highlig
     screen.blit(chosenPieceTxt, (800, 70))
     if (piece != 0):
         chosenPieceImg = pygame.image.load(chessPieces[piece-1]).convert_alpha()
-        chosenPieceImg = pygame.transform.scale(chosenPieceImg, (100, 50))
-        screen.blit(chosenPieceImg, (812, 180))
+        chosenPieceImg = pygame.transform.scale(chosenPieceImg, (100, 120))
+        screen.blit(chosenPieceImg, (850, 180))
         pieceTxt = pygame.image.load( os.path.join(images_path, pieceStr[piece-1]) ).convert_alpha()
-        pieceTxt = pygame.transform.scale(pieceTxt, (100, 80))
-        screen.blit(pieceTxt, (755, 310))
+        screen.blit(pieceTxt, (755, 280))
     
     if (pieceCoord is not None):
         if (isValid(condition)):
@@ -79,7 +78,7 @@ def displayGame (gameState, pieceCoord, condition = True, substate = [], highlig
         else:
             isValidImg = pygame.image.load(os.path.join(os.path.dirname(__file__), "graphics", "invalidMove.png")).convert_alpha()
     
-        screen.blit(isValidImg, (775, 400))
+        screen.blit(isValidImg, (775, 360))
 
     # Draw the chessboard
     gray = (175, 171, 157)
@@ -101,8 +100,8 @@ def displayGame (gameState, pieceCoord, condition = True, substate = [], highlig
     
     if (piece != 0):
         tutorialImg = pygame.image.load(tutorialImages[tutorialNum-1]).convert_alpha()
-        tutorialImg = pygame.transform.scale(tutorialImg, (120, 120))
-        screen.blit(tutorialImg, (775, 450)) #edit: prob need to change the coords 
+        tutorialImg = pygame.transform.scale(tutorialImg, (160, 140))
+        screen.blit(tutorialImg, (790, 530)) #edit: prob need to change the coords 
         
     
     # Draws the chess pieces onto the board

@@ -1,5 +1,5 @@
-UPPER_LIM = 0.55
-LOWER_LIM = 0.48
+UPPER_LIM = 0.53
+LOWER_LIM = 0.49
 
 def getSensorMap(i0, i1):
     # boardState = [

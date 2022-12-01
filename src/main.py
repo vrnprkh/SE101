@@ -11,8 +11,8 @@ import random
 import itertools
 
 pygame.init()
-MIN_THRESHOLD = 0.33
-MAX_THRESHOLD = 0.66
+MIN_THRESHOLD = 0.48
+MAX_THRESHOLD = 0.54
 
 running = True
 
@@ -28,9 +28,9 @@ randomLevel = random.choice([rookLevel, bishopLevel, queenLevel])
 #     ]
 
 boardState = [
-    [0,7,0,0],
-    [0,0,3,0],
+    [0,0,7,0],
     [0,0,0,0],
+    [0,3,0,0],
     [0,0,0,0]
 
 ]
