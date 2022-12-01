@@ -68,7 +68,7 @@ def displayGame (gameState, pieceCoord, condition = True, substate = [], highlig
     if (piece != 0):
         chosenPieceImg = pygame.image.load(chessPieces[piece-1]).convert_alpha()
         chosenPieceImg = pygame.transform.scale(chosenPieceImg, (100, 100))
-        screen.blit(chosenPieceImg, (812, 180))
+        screen.blit(chosenPieceImg, (850, 180))
         pieceTxt = pygame.image.load( os.path.join(images_path, pieceStr[piece-1]) ).convert_alpha()
         screen.blit(pieceTxt, (755, 280))
     
@@ -100,8 +100,8 @@ def displayGame (gameState, pieceCoord, condition = True, substate = [], highlig
     
     if (piece != 0):
         tutorialImg = pygame.image.load(tutorialImages[tutorialNum-1]).convert_alpha()
-        tutorialImg = pygame.transform.scale(tutorialImg, (120, 120))
-        screen.blit(tutorialImg, (775, 450)) #edit: prob need to change the coords 
+        tutorialImg = pygame.transform.scale(tutorialImg, (140, 140))
+        screen.blit(tutorialImg, (775, 490)) #edit: prob need to change the coords 
         
     
     # Draws the chess pieces onto the board
