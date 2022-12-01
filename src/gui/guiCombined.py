@@ -116,8 +116,10 @@ def colourSquares(pieceCoord, gameState, x, y, screen):
     piece = gameState[row][col]
 
     possibleMoves = None
-    if piece == 1 or piece == 7:
-        possibleMoves = Pawn.pawnLegal(row, col, gameState)
+    if piece == 1:
+        possibleMoves = Pawn.pawnBlackLegal(row, col, gameState)
+    if piece == 7:
+        possibleMoves = Pawn.pawnWhiteLegal(row, col, gameState)
     elif piece == 2 or piece == 8:
         possibleMoves = Rook.rookLegal(row, col, gameState)
     elif piece == 3 or piece == 9:

@@ -1,6 +1,8 @@
 from . import BoardState, TutorialLevel
 from . import illegalMove
 
+import functools
+
 class BoardProcessor:
     def __init__(self, state, tutorialData = None):
         self.boardState = BoardState.BoardState(state)
@@ -11,6 +13,18 @@ class BoardProcessor:
         self.secondCoord = None
         self.csubState = 0
         # self.l = [1, 2, 3, 4]
+
+    def onePieceLeft(self) -> bool:
+        numPieces = []
+        for row in self.boardState:
+            for col in row:
+                if self.boardState[row][col] > 0:
+                    numPieces.append(self.boardState[row][col])
+
+        numPawns = functools.reduce(lambda x, y: x + y if (y == 1 or y == 7) else y, numPieces, 0)
+        numPieces = len(numPieces) - numPawns
+
+        return numPieces <= 0
 
     # takes new sensors, updates self, and other states, SENSOR MAP ONLY 1S AND 0S
     def update(self, newSensorMap) -> int:
@@ -121,4 +135,7 @@ class BoardProcessor:
             else:
                 move = (self.firstCoord, self.secondCoord)
                 self.boardState.updateState(move)
-                return 2
+                if self.onePieceLeft(): #If one piece is left, we want the main function to stop execution
+                    return 3
+                else: #if more than one piece left, we want the main function to stop execution
+                    return 2

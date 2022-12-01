@@ -24,8 +24,11 @@ class LegalMoveProcessor:
         if not boardProcessor.tutorial == None:
             return LegalMoveProcessor.isLegalTutorialMove(move)
 
-        if piece == 7 or piece == 1:
-            return (move[1] in Pawn.pawnLegal(move[0][0], move[0][1], boardProcessor.boardState.formatBoardState(piece)))
+        if piece == 1:
+            return (move[1] in Pawn.pawnBlackLegal(move[0][0], move[0][1], boardProcessor.boardState.formatBoardState(piece)))
+
+        if piece == 7:
+            return (move[1] in Pawn.pawnWhiteLegal(move[0][0], move[0][1], boardProcessor.boardState.formatBoardState(piece)))
 
         if piece == 9 or piece == 3:
             return (move[1] in Knight.knightLegal(move[0][0], move[0][1], boardProcessor.boardState.formatBoardState(piece)))
