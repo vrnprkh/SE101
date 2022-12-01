@@ -93,6 +93,7 @@ while running:
     print(result)
 
     if result == 2:
+        
         guiCombined.displayGame(game.boardState.state, game.firstCoord)
         time.sleep(5)
         pygame.quit()
