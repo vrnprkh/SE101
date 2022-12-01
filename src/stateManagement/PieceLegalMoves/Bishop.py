@@ -7,8 +7,12 @@ def bishopLegal(row, col, boardState):
     while r < Constants.MAX and c < Constants.MAX:
         r += 1
         c += 1
-        if boardState[r][c] != 0 and boardState[r][c] != Constants.enemy:
+        if boardState[r][c] == Constants.enemy:
+            moves.append((r, c))
             break
+        if boardState[r][c] != 0:
+            break
+
         moves.append((r, c))
 
     r = row
@@ -17,8 +21,12 @@ def bishopLegal(row, col, boardState):
     while r < Constants.MAX and c > Constants.MIN:
         r += 1
         c -= 1
-        if boardState[r][c] != 0 and boardState[r][c] != Constants.enemy:
+        if boardState[r][c] == Constants.enemy:
+            moves.append((r, c))
             break
+        if boardState[r][c] != 0:
+            break
+
         moves.append((r, c))
 
     r = row
@@ -27,8 +35,12 @@ def bishopLegal(row, col, boardState):
     while r > Constants.MIN and c < Constants.MAX:
         r -= 1
         c += 1
-        if boardState[r][c] != 0 and boardState[r][c] != Constants.enemy:
+        if boardState[r][c] == Constants.enemy:
+            moves.append((r, c))
             break
+        if boardState[r][c] != 0:
+            break
+
         moves.append((r, c))
 
     r = row
@@ -37,8 +49,12 @@ def bishopLegal(row, col, boardState):
     while r > Constants.MIN and c > Constants.MIN:
         r -= 1
         c -= 1
-        if boardState[r][c] != 0 and boardState[r][c] != Constants.enemy:
+        if boardState[r][c] == Constants.enemy:
+            moves.append((r, c))
             break
+        if boardState[r][c] != 0:
+            break
+
         moves.append((r, c))
     
     return moves
