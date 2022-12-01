@@ -1,7 +1,7 @@
 import pygame
 import os
 from .PieceLegalMoves import Pawn, Rook, Bishop, Knight, Queen, King, Constants
-from .formatState import formatState
+from .formatState import formatBoardState
 
 # from ..stateManagement.PieceLegalMoves import Pawn, Bishop, Knight, Rook, Queen, King
 # Pawn = importlib.import_module( os.path.abspath(os.path.join( os.path.dirname(__file__), "..", "stateManagement", "PieceLegalMoves", "Pawn.py")) )
