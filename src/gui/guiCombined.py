@@ -92,7 +92,7 @@ def displayGame (gameState, pieceCoord, condition = True, substate = [], highlig
             pygame.draw.rect(screen, colour, pygame.Rect(x+(160*j), y+(160*i), 160, 160))
 
     if pieceCoord is not None:
-        colourSquares(pieceCoord, formatState(gameState, piece), x, y, screen)
+        colourSquares(pieceCoord, formatBoardState(gameState, piece), x, y, screen)
 
     # Displays the mini tutorial on the side
     if piece > 6: tutorialNum = piece - 6
