@@ -1,9 +1,9 @@
 from .PieceLegalMoves import Constants
 
-def formatBoardState(self, piece):
+def formatBoardState(gameState, piece):
     #We will consider any black pieces as being the opponent 
         #White pieces have a value in the range [7...12]
-    copy_state = [ [i for i in row] for row in self.state ]
+    copy_state = [ [i for i in row] for row in gameState ]
     print(copy_state)
 
     colour = ""
