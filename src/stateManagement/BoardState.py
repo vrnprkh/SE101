@@ -26,9 +26,9 @@ class BoardState:
 
         for i, row in enumerate(copy_state):
             for j, col in enumerate(row):
-                if colour == "white" and col in [1, 2, 3, 4, 5, 6]:
+                if colour == "white" and copy_state[i][j] in [1, 2, 3, 4, 5, 6]:
                     copy_state[i][j] = Constants.enemy
-                elif colour == "black" and col in [7, 8, 9, 10, 11, 12]:
+                elif colour == "black" and copy_state[i][j] in [7, 8, 9, 10, 11, 12]:
                     copy_state[i][j] = Constants.enemy
 
         return copy_state
