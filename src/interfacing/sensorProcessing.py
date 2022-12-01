@@ -1,13 +1,20 @@
-UPPER_LIM = 0.7
-LOWER_LIM = 0.4
+UPPER_LIM = 0.55
+LOWER_LIM = 0.48
 
 def getSensorMap(i0, i1):
+    # boardState = [
+    #     [i0[0], i0[1], i0[2], i0[3]],
+    #     [i0[4], i0[5], i0[6], i0[7]],
+    #     [i1[0], i1[1], i1[2], i1[3]],
+    #     [i1[4], i1[5], i1[6], i1[7]]
+    #     #hardcoded for now, fix later
+    # ]
     boardState = [
-        [i0[0], i0[1], i0[2], i0[3]],
-        [i0[4], i0[5], i0[6], i0[7]],
-        [i1[0], i1[1], i1[2], i1[3]],
-        [i1[4], i1[5], i1[6], i1[7]]
-        #hardcoded for now, fix later
+        [i0[3], i0[0], i1[4], i1[3]],
+        [i0[2], i0[1], i1[5], i1[2]],
+        [i0[4], i0[5], i1[6], i1[1]],
+        [i0[7], i0[6], i1[7], i1[0]]
+    #     #hardcoded for now, fix later
     ]
 
     '''

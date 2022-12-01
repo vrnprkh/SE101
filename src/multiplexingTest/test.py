@@ -4,7 +4,7 @@ import itertools
 
 
 
-breadboard = Arduino('COM3')
+breadboard = Arduino('COM5')
 iterator = util.Iterator(breadboard)
 iterator.start()
 input0 = breadboard.get_pin('a:0:i')
