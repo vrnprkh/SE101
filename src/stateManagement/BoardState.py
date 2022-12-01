@@ -16,6 +16,7 @@ class BoardState:
         #We will consider any black pieces as being the opponent 
             #White pieces have a value in the range [7...12]
         copy_state = [ [i for i in row] for row in self.state ]
+        print("Copied State:")
         print(copy_state)
 
         colour = ""
@@ -31,4 +32,6 @@ class BoardState:
                 elif colour == "black" and copy_state[i][j] in [7, 8, 9, 10, 11, 12]:
                     copy_state[i][j] = Constants.enemy
 
+        print("Formatted Copied State")
+        print(copy_state)
         return copy_state

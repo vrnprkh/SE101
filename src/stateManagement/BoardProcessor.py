@@ -16,10 +16,10 @@ class BoardProcessor:
 
     def onePieceLeft(self) -> bool:
         numPieces = []
-        for row in self.boardState:
-            for col in row:
-                if self.boardState[row][col] > 0:
-                    numPieces.append(self.boardState[row][col])
+        for i, row in enumerate(self.boardState.state):
+            for j, col in enumerate(row):
+                if self.boardState.state[i][j] > 0:
+                    numPieces.append(self.boardState.state[i][j])
 
         numPawns = functools.reduce(lambda x, y: x + y if (y == 1 or y == 7) else y, numPieces, 0)
         numPieces = len(numPieces) - numPawns
