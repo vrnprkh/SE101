@@ -18,7 +18,7 @@ Group members: Emily Wang, Justin Lin, Jacqueline Ho, Nandan Patel, Varun Parikh
 
 ## Implementation
 
-![Block Diagram](/images/"block diagram.png")
+![Block Diagram](/images/block%20diagram.png)
 
 
 ### Software
